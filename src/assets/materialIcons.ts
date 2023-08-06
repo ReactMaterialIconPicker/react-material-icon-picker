@@ -1,4 +1,4 @@
-export const MATERIAL_ICONS = [
+export const MATERIAL_ICONS: string[] = [
     '123',
     '360',
     '10k',

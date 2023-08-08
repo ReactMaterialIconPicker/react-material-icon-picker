@@ -1,11 +1,11 @@
-name: unit testing
+name: functional testing
 
-on:
+on: 
   push:
   pull_request:
 
 jobs:
-  jest:
+  cypress-run:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -17,8 +17,10 @@ jobs:
           node-version: 18.10.0
           cache: 'npm'
 
-      - name: Install dependencies
-        run: npm install
-      
-      - name: Run unit tests
-        run: npm run jest
+
+      - name: Cypress run on chrome
+        uses: cypress-io/github-action@v5
+        with:
+          build: npm run build
+          start: npm start
+          browser: chrome

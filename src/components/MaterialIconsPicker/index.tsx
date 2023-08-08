@@ -7,7 +7,7 @@ interface MaterialIconsPickerProps {
 }
 
 
-export const MaterialIconsPicker = (prop: MaterialIconsPickerProps) => {
+export const MaterialIconsPicker = (props: MaterialIconsPickerProps) => {
     return <div className={styles.container}>
         <ArrowDown />
         MaterialIconsPicker

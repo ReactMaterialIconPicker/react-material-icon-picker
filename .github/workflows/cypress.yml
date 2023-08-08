@@ -21,6 +21,5 @@ jobs:
       - name: Cypress run on chrome
         uses: cypress-io/github-action@v5
         with:
-          build: npm run build
-          start: npm start
+          run: npm run cypress
           browser: chrome

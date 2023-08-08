@@ -19,4 +19,4 @@ jobs:
 
 
       - name: Cypress run on chrome
-        run: cypress run --component --browser chrome
+        run: npm run cypress:chrome

@@ -1,15 +1,16 @@
-import React from "react";
+import React from 'react';
 import ArrowDown from '../../assets/icons/arrowDown.svg';
 import styles from './index.module.css';
 
 interface MaterialIconsPickerProps {
-    test: string
+  test: string;
 }
-
 
 export const MaterialIconsPicker = (props: MaterialIconsPickerProps) => {
-    return <div className={styles.container}>
-        <ArrowDown />
-        MaterialIconsPicker
+  return (
+    <div className={styles.container}>
+      <ArrowDown />
+      MaterialIconsPicker
     </div>
-}
+  );
+};

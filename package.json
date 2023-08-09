@@ -8,7 +8,10 @@
     "start": "webpack-dev-server --mode development --open --hot",
     "build": "webpack --mode production",
     "jest": "jest",
-    "cypress:chrome": "cypress run --component --browser chrome"
+    "cypress:chrome": "cypress run --component --browser chrome",
+    "cypress:firefox": "cypress run --component --browser firefox",
+    "cypress:edge": "cypress run --component --browser edge",
+    "prettier": "npx prettier . --write"
   },
   "repository": {
     "type": "git",
@@ -39,6 +42,7 @@
     "cypress": "^12.17.3",
     "html-webpack-plugin": "^5.5.3",
     "jest": "^29.6.2",
+    "prettier": "3.0.1",
     "style-loader": "^3.3.3",
     "ts-loader": "^9.4.4",
     "typescript": "^5.1.6",

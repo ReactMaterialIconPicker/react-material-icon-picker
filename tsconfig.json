@@ -1,20 +1,17 @@
 {
-    "compilerOptions": {
-        "outDir": "./dist/",
-        "target": "es5",
-        "module": "es6",
-        "strictNullChecks": true,
-        "strict": true,
-        "esModuleInterop": true,
-        "noImplicitAny": true,
-        "allowJs": true,
-        "moduleResolution": "node",
-        "declaration": true,
-        "jsx": "react-jsx",
-        "types": ["cypress"]
-    },
-    "include": [
-        "src",
-        "cypress"
-    ]
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "target": "es5",
+    "module": "es6",
+    "strictNullChecks": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "noImplicitAny": true,
+    "allowJs": true,
+    "moduleResolution": "node",
+    "declaration": true,
+    "jsx": "react-jsx",
+    "types": ["cypress"]
+  },
+  "include": ["src", "cypress"]
 }

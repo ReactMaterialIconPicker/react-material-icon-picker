@@ -23,3 +23,15 @@ jobs:
         with:
           command: npm run cypress:chrome
           browser: chrome
+
+      - name: Cypress run on firefox
+        uses: cypress-io/github-action@v5
+        with:
+          command: npm run cypress:firefox
+          browser: firefox
+
+      - name: Cypress run on edge
+        uses: cypress-io/github-action@v5
+        with:
+          command: npm run cypress:edge
+          browser: edge

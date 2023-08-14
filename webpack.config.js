@@ -1,3 +1,4 @@
+
 const path = require('path');
 
 module.exports = {
@@ -21,7 +22,7 @@ module.exports = {
       },
       {
         test: /\.svg$/,
-        use: ['@svgr/webpack'],
+        loader: 'url-loader',
       },
       {
         test: /\.css$/,
@@ -37,4 +38,18 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.jsx', '.js'],
   },
+  externals: {      
+    react: {          
+        commonjs: "react",          
+        commonjs2: "react",          
+        amd: "React",          
+        root: "React"      
+    },      
+    "react-dom": {          
+        commonjs: "react-dom",          
+        commonjs2: "react-dom",          
+        amd: "ReactDOM",          
+        root: "ReactDOM"      
+    }  
+  }
 };

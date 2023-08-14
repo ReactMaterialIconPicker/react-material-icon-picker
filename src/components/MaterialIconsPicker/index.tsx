@@ -1,16 +1,35 @@
-import React from 'react';
-import ArrowDown from '../../assets/icons/arrowDown.svg';
-import styles from './index.module.css';
+import React, { memo, useState } from 'react';
+import { CONTAINER_BASE_STYLE } from '../../lib/styles';
+import { IconSearch } from '../IconSearch';
+import { MaterialIconsPickerProps } from './types';
 
-interface MaterialIconsPickerProps {
-  test: string;
-}
+export const MaterialIconsPicker = memo((props: MaterialIconsPickerProps) => {
+  const {
+    styles,
+    defaultSearchValue,
+    searchValue,
+    onSearchValueChange,
+    searchBoxPlaceholder
+  } = props || {};
 
-export const MaterialIconsPicker = (props: MaterialIconsPickerProps) => {
+  const {
+    container
+  } = styles || {}
+
+  const [iconSearch, setIconSearch] = useState<string>('');
+
+  console.log('MaterialIconsPicker render');
+
   return (
-    <div className={styles.container}>
-      <ArrowDown />
-      MaterialIconsPicker
+    <div style={container ? container(CONTAINER_BASE_STYLE) : CONTAINER_BASE_STYLE}>
+      <IconSearch
+        styles={styles}
+        setIconSearch={setIconSearch}
+        defaultSearchValue={defaultSearchValue}
+        searchValue={searchValue}
+        onSearchValueChange={onSearchValueChange}
+        searchBoxPlaceholder={searchBoxPlaceholder}
+      />
     </div>
   );
-};
+});

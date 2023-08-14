@@ -6,12 +6,12 @@
   "types": "./dist/src/index.d.ts",
   "scripts": {
     "start": "webpack-dev-server --mode development --open --hot",
-    "build": "webpack --mode production",
+    "build": "webpack --config webpack.prod.js",
     "jest": "jest",
     "cypress:chrome": "cypress run --component --browser chrome",
     "cypress:firefox": "cypress run --component --browser firefox",
     "cypress:edge": "cypress run --component --browser edge",
-    "cypress:all": "cypress:chrome && cypress:firefox && cypress:edge",
+    "cypress:electron": "cypress run --component --browser electron",
     "prettier": "npx prettier . --write"
   },
   "repository": {
@@ -50,7 +50,8 @@
     "typescript": "^5.1.6",
     "url-loader": "^4.1.1",
     "webpack": "^5.88.2",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^5.1.4",
+    "webpack-merge": "^5.9.0"
   },
   "dependencies": {
     "@react-icons/all-files": "^4.1.0"

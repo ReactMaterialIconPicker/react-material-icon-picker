@@ -4,17 +4,10 @@ import { IconSearch } from '../IconSearch';
 import { MaterialIconsPickerProps } from './types';
 
 export const MaterialIconsPicker = memo((props: MaterialIconsPickerProps) => {
-  const {
-    styles,
-    defaultSearchValue,
-    searchValue,
-    onSearchValueChange,
-    searchBoxPlaceholder
-  } = props || {};
+  const { styles, defaultSearchValue, searchValue, onSearchValueChange, searchBoxPlaceholder } =
+    props || {};
 
-  const {
-    container
-  } = styles || {}
+  const { container } = styles || {};
 
   const [iconSearch, setIconSearch] = useState<string>('');
 

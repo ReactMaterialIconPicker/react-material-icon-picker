@@ -12,6 +12,8 @@
     "cypress:firefox": "cypress run --component --browser firefox",
     "cypress:edge": "cypress run --component --browser edge",
     "cypress:electron": "cypress run --component --browser electron",
+    "cypress:all": "npm run cypress:chrome && npm run cypress:firefox && npm run cypress:edge && npm run cypress:electron",
+    "cypress:open": "cypress open",
     "prettier": "npx prettier . --write"
   },
   "repository": {

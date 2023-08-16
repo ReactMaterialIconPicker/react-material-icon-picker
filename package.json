@@ -54,8 +54,5 @@
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4",
     "webpack-merge": "^5.9.0"
-  },
-  "dependencies": {
-    "@react-icons/all-files": "^4.1.0"
   }
 }

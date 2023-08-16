@@ -31,3 +31,36 @@ export const SEARCH_INPUT_BASE_STYLE: StyleObject = {
   fontSize: '12px',
   fontFamily: 'Arial, serif',
 };
+
+export const OPTION_CONTAINER_BASE_STYLE: StyleObject = {
+  width: '100%',
+  height: '40px',
+  borderBottom: '1px solid rgb(229, 229, 229)',
+  boxSizing: 'border-box',
+  display: 'flex',
+  alignItems: 'center',
+};
+
+export const TYPE_CONTAINER_BASE_STYLE: StyleObject = {
+  height: '100%',
+  width: '0px',
+  flexGrow: '1',
+  borderRight: '1px solid #E5E5E5',
+  position: 'relative',
+  display: 'flex',
+  alignItems: 'center',
+  boxSizing: 'border-box',
+  padding: '11px 13px',
+  cursor: 'pointer',
+};
+
+export const TYPE_SELECTED_BASE_STYLE: StyleObject = {
+  fontFamily: 'Arial, serif',
+  fontSize: '12px',
+};
+
+export const TYPE_ARROW_BASE_STYLE: StyleObject = {
+  height: '50%',
+  cursor: 'pointer',
+  marginLeft: 'auto',
+};

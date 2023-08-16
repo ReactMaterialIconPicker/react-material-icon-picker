@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from 'react';
 import { StyleUpdater } from '../../lib/types';
 
 interface IStyles {
@@ -8,7 +9,7 @@ interface IStyles {
 
 export interface IconSearchProps {
   styles?: IStyles;
-  setIconSearch: (iconSearch: string) => void;
+  setIconSearch: Dispatch<SetStateAction<string>>;
   defaultSearchValue?: string;
   searchValue?: string;
   onSearchValueChange?: (value: string) => void;

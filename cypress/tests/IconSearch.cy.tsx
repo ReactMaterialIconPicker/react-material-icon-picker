@@ -22,7 +22,7 @@ describe('tests for IconSearch', () => {
       verifyComputedStyle('[data-testid=ip-searchContainer]', SEARCH_CONTAINER_BASE_STYLE);
       verifyComputedStyle('[data-testid=ip-searchIcon]', SEARCH_ICON_BASE_STYLE);
       verifyComputedStyle('[data-testid=ip-searchInput]', SEARCH_INPUT_BASE_STYLE, {
-        border: ['0px none'],
+        border: ['0px none', '0px'],
       });
     });
   });
@@ -151,6 +151,11 @@ describe('tests for IconSearch', () => {
             cy.get('@onSearchValueChange').should('be.calledWith', str);
           }
         });
+    });
+
+    it('searchBoxPlaceholder should set the placeholder value of ip-searchInput', () => {
+      cy.mount(<IconSearch setIconSearch={cy.stub()} searchBoxPlaceholder='mockedPlaceholder'/>);
+      cy.get('[data-testid=ip-searchInput]').invoke('attr', 'placeholder').should('eq', 'mockedPlaceholder');
     });
   });
 });

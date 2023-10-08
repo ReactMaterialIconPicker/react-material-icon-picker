@@ -27,6 +27,11 @@
     "url": "https://github.com/KurtXiaoZ/react-material-icons-picker/issues"
   },
   "homepage": "https://github.com/KurtXiaoZ/react-material-icons-picker#readme",
+  "dependencies": {
+    "@uiw/color-convert": "^1.1.1",
+    "@uiw/react-color-hue": "^1.1.1",
+    "@uiw/react-color-saturation": "^1.1.1"
+  },
   "peerDependencies": {
     "react": "^18.2.0"
   },

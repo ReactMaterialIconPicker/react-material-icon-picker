@@ -5,7 +5,7 @@ interface IStyles {
   colorSelectedIndicator?: StyleUpdater;
   colorSelected?: StyleUpdater;
   colorSelectorArrow?: StyleUpdater;
-  palatteContainer?: StyleUpdater;
+  paletteContainer?: StyleUpdater;
   saturation?: StyleUpdater;
   hue?: StyleUpdater;
 }
@@ -13,7 +13,7 @@ interface IStyles {
 export interface ColorSelectorProps {
   styles?: IStyles;
   hsva?: { h: number; s: number; v: number; a: number };
-  setHsva?: (hsva: { h: number; s: number; v: number; a: number }) => void;
+  setSelectedHsva: (hsva: { h: number; s: number; v: number; a: number }) => void;
+  selectedHsva: { h: number; s: number; v: number; a: number };
   onHsvaChange?: (hsva: { h: number; s: number; v: number; a: number }) => void;
-  hsvaProp?: { h: number; s: number; v: number; a: number };
 }

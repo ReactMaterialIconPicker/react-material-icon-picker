@@ -3,7 +3,7 @@ import { CONTAINER_BASE_STYLE, OPTION_CONTAINER_BASE_STYLE } from '../../lib/sty
 import { IconSearch } from '../IconSearch';
 import { MaterialIconsPickerProps } from './types';
 import { useMaterialIcons } from '../../lib/hooks';
-import { Type } from '../../lib/types';
+import { Hsva, Type } from '../../lib/types';
 import { ICON_TYPES } from '../../lib/constants';
 import { TypeSelector } from '../TypeSelector';
 import { ColorSelector } from '../ColorSelector';
@@ -17,12 +17,15 @@ export const MaterialIconsPicker = memo((props: MaterialIconsPickerProps) => {
     searchBoxPlaceholder,
     type,
     onTypeChange,
+    hsva,
+    onHsvaChange,
   } = props || {};
 
   const { container, optionContainer } = styles || {};
 
   const [iconSearch, setIconSearch] = useState<string>('');
   const [selectedType, setSelectedType] = useState<Type>(ICON_TYPES[0]);
+  const [selectedHsva, setSelectedHsva] = useState<Hsva>({ h: 0, s: 0, v: 0, a: 1 });
 
   useMaterialIcons();
 
@@ -51,7 +54,13 @@ export const MaterialIconsPicker = memo((props: MaterialIconsPickerProps) => {
           setSelectedType={setSelectedType}
           onTypeChange={onTypeChange}
         />
-        <ColorSelector styles={styles} />
+        <ColorSelector
+          styles={styles}
+          setSelectedHsva={setSelectedHsva}
+          selectedHsva={selectedHsva}
+          hsva={hsva}
+          onHsvaChange={onHsvaChange}
+        />
       </div>
     </div>
   );

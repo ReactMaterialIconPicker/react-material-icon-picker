@@ -1,4 +1,4 @@
-import { StyleUpdater, Type } from '../../lib/types';
+import { Hsva, StyleUpdater, Type } from '../../lib/types';
 
 interface IStyles {
   container?: StyleUpdater;
@@ -15,7 +15,7 @@ interface IStyles {
   colorSelectedIndicator?: StyleUpdater;
   colorSelected?: StyleUpdater;
   colorSelectorArrow?: StyleUpdater;
-  palatteContainer?: StyleUpdater;
+  paletteContainer?: StyleUpdater;
   saturation?: StyleUpdater;
   hue?: StyleUpdater;
   iconsContainer?: StyleUpdater;
@@ -35,4 +35,6 @@ export interface MaterialIconsPickerProps {
   searchBoxPlaceholder?: string;
   type?: Type;
   onTypeChange?: (type: Type) => void;
+  hsva?: Hsva;
+  onHsvaChange?: (hsva: Hsva) => void;
 }

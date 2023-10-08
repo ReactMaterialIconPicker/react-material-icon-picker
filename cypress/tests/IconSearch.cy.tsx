@@ -114,9 +114,8 @@ describe('tests for IconSearch', () => {
     });
 
     it('defaultSearchValue should sets the default value of ip-searchInput', () => {
-      cy.mount(<IconSearch setIconSearch={cy.stub()} defaultSearchValue='mockedDefaultValue'/>);
-      cy
-        .get('[data-testid=ip-searchInput]')
+      cy.mount(<IconSearch setIconSearch={cy.stub()} defaultSearchValue="mockedDefaultValue" />);
+      cy.get('[data-testid=ip-searchInput]')
         .should('have.value', 'mockedDefaultValue')
         .clear()
         .type('mockedValue')
@@ -124,29 +123,36 @@ describe('tests for IconSearch', () => {
     });
 
     it('searchValue should sets the value of ip-searchInput', () => {
-      cy.mount(<IconSearch setIconSearch={cy.stub()} searchValue='mockedValue'/>);
-      cy
-        .get('[data-testid=ip-searchInput]')
+      cy.mount(<IconSearch setIconSearch={cy.stub()} searchValue="mockedValue" />);
+      cy.get('[data-testid=ip-searchInput]')
         .should('have.value', 'mockedValue')
         .type('newMockedValue')
         .should('have.value', 'mockedValue');
     });
 
     it('searchValue should override defaultSearchValue', () => {
-      cy.mount(<IconSearch setIconSearch={cy.stub()} searchValue='mockedValue' defaultSearchValue='mockedDefaultValue'/>);
-      cy
-        .get('[data-testid=ip-searchInput]')
-        .should('have.value', 'mockedValue')
+      cy.mount(
+        <IconSearch
+          setIconSearch={cy.stub()}
+          searchValue="mockedValue"
+          defaultSearchValue="mockedDefaultValue"
+        />,
+      );
+      cy.get('[data-testid=ip-searchInput]').should('have.value', 'mockedValue');
     });
 
     it('onSearchValueChange should be invoked with the new value of ip-searchInput when the value changes', () => {
-      cy.mount(<IconSearch setIconSearch={cy.stub()} onSearchValueChange={cy.stub().as('onSearchValueChange')}/>);
-      cy
-        .get('[data-testid=ip-searchInput]')
+      cy.mount(
+        <IconSearch
+          setIconSearch={cy.stub()}
+          onSearchValueChange={cy.stub().as('onSearchValueChange')}
+        />,
+      );
+      cy.get('[data-testid=ip-searchInput]')
         .type('mockedValue')
         .then(() => {
           let str = '';
-          for(const x of 'mockedValue') {
+          for (const x of 'mockedValue') {
             str += x;
             cy.get('@onSearchValueChange').should('be.calledWith', str);
           }
@@ -154,8 +160,10 @@ describe('tests for IconSearch', () => {
     });
 
     it('searchBoxPlaceholder should set the placeholder value of ip-searchInput', () => {
-      cy.mount(<IconSearch setIconSearch={cy.stub()} searchBoxPlaceholder='mockedPlaceholder'/>);
-      cy.get('[data-testid=ip-searchInput]').invoke('attr', 'placeholder').should('eq', 'mockedPlaceholder');
+      cy.mount(<IconSearch setIconSearch={cy.stub()} searchBoxPlaceholder="mockedPlaceholder" />);
+      cy.get('[data-testid=ip-searchInput]')
+        .invoke('attr', 'placeholder')
+        .should('eq', 'mockedPlaceholder');
     });
   });
 });

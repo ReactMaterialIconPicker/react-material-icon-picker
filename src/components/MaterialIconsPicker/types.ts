@@ -1,4 +1,4 @@
-import { StyleUpdater } from '../../lib/types';
+import { StyleUpdater, Type } from '../../lib/types';
 
 interface IStyles {
   container?: StyleUpdater;
@@ -33,4 +33,6 @@ export interface MaterialIconsPickerProps {
   searchValue?: string;
   onSearchValueChange?: (value: string) => void;
   searchBoxPlaceholder?: string;
+  type?: Type;
+  onTypeChange?: (type: Type) => void;
 }

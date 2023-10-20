@@ -37,4 +37,7 @@ export interface MaterialIconsPickerProps {
   onTypeChange?: (type: Type) => void;
   hsva?: Hsva;
   onHsvaChange?: (hsva: Hsva) => void;
+  onIconClick?: (icon: string) => void;
+  onIconMouseEnter?: (icon: string) => void;
+  setIconTipText?: (icon: string) => string;
 }

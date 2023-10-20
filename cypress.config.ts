@@ -9,6 +9,5 @@ export default defineConfig({
       webpackConfig: devWebpackConfig,
     },
     video: false,
-    screenshotOnRunFailure: false,
   },
 });

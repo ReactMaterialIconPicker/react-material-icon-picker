@@ -7,6 +7,7 @@ import { Hsva, Type } from '../../lib/types';
 import { ICON_TYPES } from '../../lib/constants';
 import { TypeSelector } from '../TypeSelector';
 import { ColorSelector } from '../ColorSelector';
+import { Icons } from '../Icons';
 
 export const MaterialIconsPicker = memo((props: MaterialIconsPickerProps) => {
   const {
@@ -19,6 +20,9 @@ export const MaterialIconsPicker = memo((props: MaterialIconsPickerProps) => {
     onTypeChange,
     hsva,
     onHsvaChange,
+    onIconClick,
+    onIconMouseEnter,
+    setIconTipText,
   } = props || {};
 
   const { container, optionContainer } = styles || {};
@@ -62,6 +66,14 @@ export const MaterialIconsPicker = memo((props: MaterialIconsPickerProps) => {
           onHsvaChange={onHsvaChange}
         />
       </div>
+      <Icons
+        iconSearch={iconSearch}
+        type={selectedType.value}
+        hsva={selectedHsva}
+        onIconClick={onIconClick}
+        onIconMouseEnter={onIconMouseEnter}
+        setIconTipText={setIconTipText}
+      />
     </div>
   );
 });

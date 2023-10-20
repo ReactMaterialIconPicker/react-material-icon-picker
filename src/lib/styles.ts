@@ -5,6 +5,8 @@ export const CONTAINER_BASE_STYLE: StyleObject = {
   minWidth: '230px',
   height: '100%',
   boxShadow: 'rgba(0, 0, 0, 0.25) 1px 1px 7px 2px',
+  display: 'flex',
+  flexDirection: 'column',
 };
 
 export const SEARCH_CONTAINER_BASE_STYLE: StyleObject = {
@@ -137,4 +139,61 @@ export const SATURATION_BASE_STYLE: StyleObject = {
 
 export const HUE_BASE_STYLE: StyleObject = {
   marginTop: '15px',
+};
+
+export const ICONS_CONTAINER_BASE_STYLE: StyleObject = {
+  width: '100%',
+  height: '0px',
+  minHeight: '200px',
+  flexGrow: '1',
+  boxSizing: 'border-box',
+  padding: '20px',
+  display: 'flex',
+  flexWrap: 'wrap',
+  justifyContent: 'space-between',
+  overflowY: 'auto',
+  overflowX: 'hidden',
+};
+
+export const ICON_CONTAINER_BASE_STYLE: StyleObject = {
+  position: 'relative',
+  width: '30px',
+  height: '30px',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  borderRadius: '2px',
+  boxSizing: 'border-box',
+};
+
+export const ICON_BASE_STYLE = ({ hex }: { hex: string }): StyleObject => ({
+  color: hex,
+  cursor: 'pointer',
+});
+
+export const ICON_TIP_BASE_STYLE = ({
+  top,
+  left,
+  visibility,
+}: {
+  top: number;
+  left: number;
+  visibility: string;
+}): StyleObject => {
+  return {
+    position: 'absolute',
+    zIndex: '10',
+    top: top + 'px',
+    left: left + 'px',
+    width: 'fit-content',
+    height: 'fit-content',
+    backgroundColor: 'rgb(34, 34, 34)',
+    color: 'rgb(255, 255, 255)',
+    boxSizing: 'border-box',
+    padding: '7px',
+    fontFamily: 'Arial serif',
+    fontSize: '12px',
+    borderRadius: '3px',
+    visibility,
+  };
 };

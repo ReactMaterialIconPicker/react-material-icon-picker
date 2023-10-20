@@ -1,0 +1,11 @@
+.iconTip {
+  visibility: hidden;
+}
+
+.iconContainer:hover > .iconTip {
+  visibility: visible;
+}
+
+.iconContainer:hover {
+  background-color: #f0f0f0;
+}

@@ -1,4 +1,4 @@
-import { forwardRef, memo, useEffect, useRef, useState } from 'react';
+import { forwardRef, memo, useRef, useState } from 'react';
 import { TypeSelectorProps } from './types';
 import ArrowDown from '../../assets/icons/arrowDown.svg';
 import {

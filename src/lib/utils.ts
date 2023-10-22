@@ -64,3 +64,57 @@ export const countNumberOfElementsInRow = (elements: NodeListOf<HTMLElement>): n
 
   return count;
 };
+
+export const countNumberOfElementsInColumn = (container: HTMLDivElement): number => {
+  const iconPlaceholders = Array.from(container.querySelectorAll('[data-testid=ip-iconPlaceholderContainer]'));
+  const containerClientHeight = container.clientHeight;
+  let row = 0, prevDistance = 0;
+
+  for(let i = 0; i < iconPlaceholders.length; ++i) {
+    const distance = getDistanceToTopBorder(iconPlaceholders[i]);
+    if(distance > containerClientHeight) return row;
+    if(distance !== prevDistance) {
+      row++;
+      prevDistance = distance;
+    }
+  }
+
+  return row;
+};
+
+export const getDistanceToTopBorder = (childElement: Element): number => {
+  // Get the child element's bottom offset relative to the viewport
+  const childRect = childElement.getBoundingClientRect().bottom;
+
+  // Get the scrollable parent element
+  const parentElement = childElement.parentElement;
+
+  if(!parentElement) return 0;
+
+  // Calculate the distance from the child to the top border of the scrollable parent
+  const distanceToTopBorder = childRect - parentElement.getBoundingClientRect().top;
+
+  return distanceToTopBorder;
+};
+
+export const getContentWidth = (element: Element) => {
+  const computedStyles = window.getComputedStyle(element);
+  const paddingLeft = parseFloat(computedStyles.paddingLeft);
+  const paddingRight = parseFloat(computedStyles.paddingRight);
+  const borderLeft = parseFloat(computedStyles.borderLeftWidth);
+  const borderRight = parseFloat(computedStyles.borderRightWidth);  
+  const contentWidth = element.clientWidth - (paddingLeft + paddingRight + borderLeft + borderRight); 
+  return contentWidth;
+};
+
+export const getContentHeight = (element: Element) => {
+  const computedStyles = window.getComputedStyle(element);
+  const paddingTop = parseFloat(computedStyles.paddingTop);
+  const paddingBottom = parseFloat(computedStyles.paddingBottom);
+  const borderTop = parseFloat(computedStyles.borderTopWidth);
+  const borderBottom = parseFloat(computedStyles.borderBottomWidth);
+
+  const contentHeight = element.clientHeight - (paddingTop + paddingBottom + borderTop + borderBottom);
+
+  return contentHeight;
+}

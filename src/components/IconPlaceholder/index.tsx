@@ -25,7 +25,7 @@ export const IconPlaceholder = (props: IconProps) => {
             ? iconStyle(ICON_BASE_STYLE({ hex: '#000000' }))
             : ICON_BASE_STYLE({ hex: '#000000' })
         }
-        data-testid='ip-iconPlaceholder'
+        data-testid="ip-iconPlaceholder"
       >
         {MATERIAL_ICONS[0]}
       </div>

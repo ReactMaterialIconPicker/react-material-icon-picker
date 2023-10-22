@@ -153,6 +153,8 @@ export const ICONS_CONTAINER_BASE_STYLE: StyleObject = {
   justifyContent: 'space-between',
   overflowY: 'auto',
   overflowX: 'hidden',
+  alignItems: 'flex-start',
+  breakInside: 'avoid',
 };
 
 export const ICON_CONTAINER_BASE_STYLE: StyleObject = {

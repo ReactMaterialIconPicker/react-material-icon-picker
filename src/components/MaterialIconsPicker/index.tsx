@@ -73,6 +73,7 @@ export const MaterialIconsPicker = memo((props: MaterialIconsPickerProps) => {
         onIconClick={onIconClick}
         onIconMouseEnter={onIconMouseEnter}
         setIconTipText={setIconTipText}
+        styles={styles}
       />
     </div>
   );

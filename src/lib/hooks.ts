@@ -131,3 +131,9 @@ export const useThrottle = (
 
   return throttledCallback;
 };
+
+export const useCleanUp = (cleanUp: () => void) => {
+  useEffect(() => {
+    return cleanUp;
+  }, []);
+}

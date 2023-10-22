@@ -6,8 +6,8 @@ interface IStyles {
   icon?: StyleUpdater;
   iconTip?: StyleUpdater;
   iconsContainerPlaceholder?: StyleUpdater;
-  loadingContainer?: StyleUpdater;
-  loading?: StyleUpdater;
+  loaderContainer?: StyleUpdater;
+  loader?: StyleUpdater;
 }
 
 export interface IconsProps {
@@ -20,4 +20,5 @@ export interface IconsProps {
   onIconMouseEnter?: (icon: string) => void;
   showIconTip?: boolean;
   setIconTipText?: (icon: string) => string;
+  disableLoader?: boolean;
 }

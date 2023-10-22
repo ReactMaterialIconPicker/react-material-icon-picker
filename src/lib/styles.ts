@@ -199,3 +199,17 @@ export const ICON_TIP_BASE_STYLE = ({
     visibility,
   };
 };
+
+export const LOADER_CONTAINER_BASE_STYLE: StyleObject = {
+  height: 'fit-content',
+  width: '100%',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  boxSizing: 'border-box',
+};
+
+export const LOADER_BASE_STYLE: StyleObject = {
+  height: '30px',
+  width: '30px',
+};

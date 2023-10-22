@@ -1,22 +1,25 @@
 import { MATERIAL_ICONS } from '../../assets/materialIcons';
+import LoaderIcon from '../../assets/icons/loading.svg';
 import {} from '../../lib/constants';
-import { ICONS_CONTAINER_BASE_STYLE } from '../../lib/styles';
+import { ICONS_CONTAINER_BASE_STYLE, LOADER_BASE_STYLE, LOADER_CONTAINER_BASE_STYLE } from '../../lib/styles';
 import type { IconsProps } from './types';
-import { useDebounce, useElementSize, useThrottle } from '../../lib/hooks';
+import { useCleanUp, useDebounce, useElementSize, useThrottle } from '../../lib/hooks';
 import { useEffect, useRef, useState } from 'react';
 import type { UIEvent } from 'react';
 import { countNumberOfElementsInRow, isFunction, countNumberOfElementsInColumn, getContentWidth, getContentHeight } from '../../lib/utils';
 import { Icon } from '../Icon';
 import { IconPlaceholder } from '../IconPlaceholder';
+import cssStyles from './index.module.css';
 
 export const Icons = (props: IconsProps) => {
-  const { styles, type, hsva, onIconClick, onIconMouseEnter, setIconTipText, iconSearch } =
+  const { styles, type, hsva, onIconClick, onIconMouseEnter, setIconTipText, iconSearch, disableLoader } =
     props || {};
 
-  const { iconsContainer } = styles || {};
+  const { iconsContainer, loaderContainer, loader } = styles || {};
 
   const [iconNumber, setIconNumber] = useState<number>(0);
   const [iconPlaceholderState, setIconPlaceholderState] = useState(0);
+  const [loading, setLoading] = useState(false);
   const [iconsContainerRef, iconsContainerWidth, iconsContainerHeight] =
     useElementSize<HTMLDivElement>();
   const iconContainerDimensionPxRef = useRef<Record<string, number>>({ width: 0, height: 0 });
@@ -26,6 +29,7 @@ export const Icons = (props: IconsProps) => {
     actualColumnCount: 0,
   });
   const initialRenderRef = useRef<boolean>(true);
+  const loaderTimeoutRef = useRef<number>(0);
   const updateIcons = useThrottle(() => setIconPlaceholderState(0), 1000);
   const deboucnedRerenderIcons = useDebounce(() => updateIcons(), 1000);
   const iconSearchResults = iconSearch
@@ -77,9 +81,14 @@ export const Icons = (props: IconsProps) => {
     const eventTarget = event.target as HTMLDivElement;
     // scrolled to the bottom
     if (eventTarget.scrollTop + eventTarget.clientHeight >= eventTarget.scrollHeight) {
-      setIconNumber((num) =>
-        Math.min(num + 3 * iconNumbersRef.current.actualColumnCount, iconSearchResults.length),
-      );
+      if(disableLoader) {
+        setIconNumber((num) =>
+          Math.min(num + 3 * iconNumbersRef.current.actualColumnCount, iconSearchResults.length),
+        );
+      }
+      else {
+        setLoading(true);
+      }
     }
   };
 
@@ -130,6 +139,22 @@ export const Icons = (props: IconsProps) => {
     }
   }, [iconsContainerWidth, iconsContainerHeight]);
 
+  useEffect(() => {
+    if(disableLoader) return;
+    if(loading) {
+      loaderTimeoutRef.current = setTimeout(() => {
+        setLoading(false);
+        setIconNumber((num) =>
+          Math.min(num + 3 * iconNumbersRef.current.actualColumnCount, iconSearchResults.length),
+        );
+      }, 1000);
+    }
+  }, [loading, disableLoader]);
+
+  useCleanUp(() => {
+    clearTimeout(loaderTimeoutRef.current);
+  });
+
   return (
     <div
       style={
@@ -142,6 +167,17 @@ export const Icons = (props: IconsProps) => {
       data-testid="ip-iconsContainer"
     >
       {renderIcons()}
+      {loading && <div
+        style={isFunction(loaderContainer) ? loaderContainer(LOADER_CONTAINER_BASE_STYLE) : LOADER_CONTAINER_BASE_STYLE}
+        data-testid='ip-loaderContainer'
+      >
+        <img
+          src={LoaderIcon}
+          style={isFunction(loader) ? loader(LOADER_BASE_STYLE) : LOADER_BASE_STYLE}
+          data-testid='ip-loader'
+          className={cssStyles['ip-rotate']}
+        />
+      </div>}
     </div>
   );
 };

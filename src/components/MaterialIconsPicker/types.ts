@@ -22,8 +22,8 @@ interface IStyles {
   iconContainer?: StyleUpdater;
   icon?: StyleUpdater;
   iconTip?: StyleUpdater;
-  loadingContainer?: StyleUpdater;
-  loading?: StyleUpdater;
+  loaderContainer?: StyleUpdater;
+  loader?: StyleUpdater;
   iconsContainerPlaceholder?: StyleUpdater;
 }
 
@@ -40,4 +40,5 @@ export interface MaterialIconsPickerProps {
   onIconClick?: (icon: string) => void;
   onIconMouseEnter?: (icon: string) => void;
   setIconTipText?: (icon: string) => string;
+  disableLoader?: boolean;
 }

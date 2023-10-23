@@ -12,7 +12,7 @@ import { IconPlaceholder } from '../IconPlaceholder';
 import cssStyles from './index.module.css';
 
 export const Icons = (props: IconsProps) => {
-  const { styles, type, hsva, onIconClick, onIconMouseEnter, setIconTipText, iconSearch, disableLoader } =
+  const { styles, type, hsva, onIconClick, onIconMouseEnter, setIconTipText, iconSearch, onIconsChange, onIconsScroll, disableLoader } =
     props || {};
 
   const { iconsContainer, loaderContainer, loader } = styles || {};
@@ -77,7 +77,8 @@ export const Icons = (props: IconsProps) => {
     return [];
   };
 
-  const onIconsContainerScroll = (event: UIEvent<HTMLDivElement>) => {
+  const onIconsContainerScroll = (event: React.SyntheticEvent) => {
+    if(isFunction(onIconsScroll)) onIconsScroll(event);
     const eventTarget = event.target as HTMLDivElement;
     // scrolled to the bottom
     if (eventTarget.scrollTop + eventTarget.clientHeight >= eventTarget.scrollHeight) {
@@ -150,6 +151,10 @@ export const Icons = (props: IconsProps) => {
       }, 1000);
     }
   }, [loading, disableLoader]);
+
+  useEffect(() => {
+    if(isFunction(onIconsChange)) onIconsChange(iconSearchResults.slice(0, iconNumber));
+  }, [iconSearchResults, iconNumber]);
 
   useCleanUp(() => {
     clearTimeout(loaderTimeoutRef.current);

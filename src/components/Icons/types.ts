@@ -20,5 +20,6 @@ export interface IconsProps {
   onIconMouseEnter?: (icon: string) => void;
   showIconTip?: boolean;
   setIconTipText?: (icon: string) => string;
+  onIconsScroll?: (e: React.SyntheticEvent) => void;
   disableLoader?: boolean;
 }

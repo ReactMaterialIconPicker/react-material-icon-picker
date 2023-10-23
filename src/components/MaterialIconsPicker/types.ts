@@ -40,5 +40,6 @@ export interface MaterialIconsPickerProps {
   onIconClick?: (icon: string) => void;
   onIconMouseEnter?: (icon: string) => void;
   setIconTipText?: (icon: string) => string;
+  onIconsScroll?: (e: React.SyntheticEvent) => void;
   disableLoader?: boolean;
 }

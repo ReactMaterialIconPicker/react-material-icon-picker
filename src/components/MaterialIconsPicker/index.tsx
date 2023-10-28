@@ -15,6 +15,7 @@ export const MaterialIconsPicker = memo((props: MaterialIconsPickerProps) => {
     defaultSearchValue,
     searchValue,
     onSearchValueChange,
+    onSearchValueSettled,
     searchBoxPlaceholder,
     type,
     onTypeChange,
@@ -42,6 +43,7 @@ export const MaterialIconsPicker = memo((props: MaterialIconsPickerProps) => {
         defaultSearchValue={defaultSearchValue}
         searchValue={searchValue}
         onSearchValueChange={onSearchValueChange}
+        onSearchValueSettled={onSearchValueSettled}
         searchBoxPlaceholder={searchBoxPlaceholder}
       />
       <div

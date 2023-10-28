@@ -1,11 +1,9 @@
 import { MATERIAL_ICONS } from '../../assets/materialIcons';
 import LoaderIcon from '../../assets/icons/loading.svg';
-import {} from '../../lib/constants';
 import { ICONS_CONTAINER_BASE_STYLE, LOADER_BASE_STYLE, LOADER_CONTAINER_BASE_STYLE } from '../../lib/styles';
 import type { IconsProps } from './types';
 import { useCleanUp, useDebounce, useElementSize, useThrottle } from '../../lib/hooks';
 import { useEffect, useRef, useState } from 'react';
-import type { UIEvent } from 'react';
 import { countNumberOfElementsInRow, isFunction, countNumberOfElementsInColumn, getContentWidth, getContentHeight } from '../../lib/utils';
 import { Icon } from '../Icon';
 import { IconPlaceholder } from '../IconPlaceholder';

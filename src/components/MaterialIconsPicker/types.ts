@@ -32,6 +32,7 @@ export interface MaterialIconsPickerProps {
   defaultSearchValue?: string;
   searchValue?: string;
   onSearchValueChange?: (value: string) => void;
+  onSearchValueSettled?: (value: string) => void;
   searchBoxPlaceholder?: string;
   type?: Type;
   onTypeChange?: (type: Type) => void;

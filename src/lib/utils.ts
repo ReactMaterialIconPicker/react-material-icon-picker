@@ -117,4 +117,4 @@ export const getContentHeight = (element: Element) => {
   const contentHeight = element.clientHeight - (paddingTop + paddingBottom + borderTop + borderBottom);
 
   return contentHeight;
-}
+};

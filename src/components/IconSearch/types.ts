@@ -13,5 +13,6 @@ export interface IconSearchProps {
   defaultSearchValue?: string;
   searchValue?: string;
   onSearchValueChange?: (value: string) => void;
+  onSearchValueSettled?: (value: string) => void;
   searchBoxPlaceholder?: string;
 }

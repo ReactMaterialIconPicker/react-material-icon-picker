@@ -15,6 +15,7 @@ export const IconSearch = memo((props: IconSearchProps) => {
     defaultSearchValue,
     searchValue,
     onSearchValueChange,
+    onSearchValueSettled,
     searchBoxPlaceholder,
   } = props || {};
 
@@ -32,7 +33,10 @@ export const IconSearch = memo((props: IconSearchProps) => {
       <img
         src={SearchIcon}
         style={searchIcon ? searchIcon(SEARCH_ICON_BASE_STYLE) : SEARCH_ICON_BASE_STYLE}
-        onClick={() => setIconSearch(searchInputRef.current?.value || '')}
+        onClick={() => {
+          setIconSearch(searchInputRef.current?.value || '');
+          isFunction(onSearchValueSettled) && onSearchValueSettled(searchInputRef.current?.value || '');
+        }}
         data-testid="ip-searchIcon"
       />
       <input
@@ -44,9 +48,12 @@ export const IconSearch = memo((props: IconSearchProps) => {
         }
         placeholder={searchBoxPlaceholder || 'Search'}
         ref={searchInputRef}
-        onKeyDown={(e: KeyboardEvent<HTMLInputElement>) =>
-          e.key === 'Enter' && setIconSearch(searchInputRef.current?.value || '')
-        }
+        onKeyDown={(e: KeyboardEvent<HTMLInputElement>) => {
+          if (e.key === 'Enter') {
+            setIconSearch(searchInputRef.current?.value || '');
+            isFunction(onSearchValueSettled) && onSearchValueSettled(searchInputRef.current?.value || '');
+          }
+        }}
         data-testid="ip-searchInput"
       />
     </div>

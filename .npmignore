@@ -1,0 +1,7 @@
+.DS_Store
+.github/
+cypress/
+jest/
+node_modules/
+src/
+cypress.config.ts

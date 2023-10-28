@@ -1,7 +1,7 @@
 {
   "name": "react-material-icons-picker",
   "version": "1.0.0",
-  "description": "",
+  "description": "react material icons picker component",
   "main": "./dist/bundle.js",
   "types": "./dist/src/index.d.ts",
   "scripts": {
@@ -20,9 +20,13 @@
     "type": "git",
     "url": "git+https://github.com/KurtXiaoZ/react-material-icons-picker.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "react",
+    "react-component"
+  ],
+  "author": "KurtXiaoZ",
+  "license": "MIT",
+  "private": false,
   "bugs": {
     "url": "https://github.com/KurtXiaoZ/react-material-icons-picker/issues"
   },

@@ -11,7 +11,10 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
+        exclude: [
+          /node_modules/,
+          path.join(__dirname, '/cypress')
+        ],
         use: {
           loader: 'babel-loader',
           options: {
@@ -30,7 +33,10 @@ module.exports = {
       {
         test: /\.(tsx|ts)?$/,
         use: 'ts-loader',
-        exclude: /node_modules/,
+        exclude: [
+          /node_modules/,
+          path.join(__dirname, '/cypress')
+        ],
       },
     ],
   },

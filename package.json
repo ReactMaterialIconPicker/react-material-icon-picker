@@ -1,7 +1,7 @@
 {
-  "name": "react-material-icons-picker",
+  "name": "react-material-icon-picker",
   "version": "1.0.0",
-  "description": "react material icons picker component",
+  "description": "react material icon picker component",
   "main": "dist/bundle.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/KurtXiaoZ/react-material-icons-picker.git"
+    "url": "git+https://github.com/KurtXiaoZ/react-material-icon-picker.git"
   },
   "keywords": [
     "react",
@@ -28,9 +28,9 @@
   "license": "MIT",
   "private": false,
   "bugs": {
-    "url": "https://github.com/KurtXiaoZ/react-material-icons-picker/issues"
+    "url": "https://github.com/KurtXiaoZ/react-material-icon-picker/issues"
   },
-  "homepage": "https://github.com/KurtXiaoZ/react-material-icons-picker#readme",
+  "homepage": "https://github.com/KurtXiaoZ/react-material-icon-picker#readme",
   "dependencies": {
     "@uiw/color-convert": "^1.1.1",
     "@uiw/react-color-hue": "^1.1.1",

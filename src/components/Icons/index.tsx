@@ -28,9 +28,9 @@ export const Icons = (props: IconsProps) => {
   });
   const initialRenderRef = useRef<boolean>(true);
   const loaderTimeoutRef = useRef<number>(0);
-  const updateIcons = useThrottle(() => setIconPlaceholderState(0), 1000);
-  const deboucnedRerenderIcons = useDebounce(() => updateIcons(), 1000);
-  const iconSearchResults = iconSearch
+  const updateIcons = useThrottle(() => setIconPlaceholderState(0), 500);
+  const deboucnedRerenderIcons = useDebounce(() => updateIcons(), 500);
+  const iconSearchResults = String(iconSearch) !== ''
     ? MATERIAL_ICONS.filter((s) => s.toLowerCase().includes(iconSearch.toLowerCase()))
     : MATERIAL_ICONS;
 
@@ -87,6 +87,7 @@ export const Icons = (props: IconsProps) => {
       }
       else {
         setLoading(true);
+        if(iconsContainerRef.current) iconsContainerRef.current.style.overflowY = 'hidden';
       }
     }
   };
@@ -122,7 +123,7 @@ export const Icons = (props: IconsProps) => {
       iconNumbersRef.current.actualRowCount = countNumberOfElementsInColumn(iconsContainerRef.current as HTMLDivElement);
 
       let initIconNumber = iconNumbersRef.current.actualColumnCount * iconNumbersRef.current.actualRowCount;
-      if(iconSearchResults.length > initIconNumber) initIconNumber = Math.min(iconSearchResults.length, initIconNumber + iconNumbersRef.current.actualColumnCount);
+      if(iconSearchResults.length > initIconNumber) initIconNumber = Math.min(iconSearchResults.length, initIconNumber + iconNumbersRef.current.actualColumnCount * 2);
       else if(iconSearchResults.length <= initIconNumber) initIconNumber = iconSearchResults.length;
       setIconNumber(initIconNumber);
 
@@ -146,7 +147,8 @@ export const Icons = (props: IconsProps) => {
         setIconNumber((num) =>
           Math.min(num + 3 * iconNumbersRef.current.actualColumnCount, iconSearchResults.length),
         );
-      }, 1000);
+        if(iconsContainerRef.current) iconsContainerRef.current.style.overflowY = 'auto';
+      }, 500);
     }
   }, [loading, disableLoader]);
 

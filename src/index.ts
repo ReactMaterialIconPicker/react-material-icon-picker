@@ -1,1 +1,1 @@
-export { MaterialIconsPicker } from './components/MaterialIconsPicker';
+export { MaterialIconPicker } from './components/MaterialIconPicker';

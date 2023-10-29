@@ -1,4 +1,4 @@
-import { MaterialIconsPicker } from '../../src';
+import { MaterialIconPicker } from '../../src';
 import { verifyComputedStyle } from '../lib/util';
 import {
   ICON_BASE_STYLE,
@@ -11,7 +11,7 @@ import { MATERIAL_ICONS } from '../../src/assets/materialIcons';
 describe('tests for Icon', () => {
   describe('all elements should be correctly rendered', () => {
     it('all elements should have the correct base style', () => {
-      cy.mount(<MaterialIconsPicker />);
+      cy.mount(<MaterialIconPicker />);
       verifyComputedStyle('[data-testid=ip-iconContainer]', ICON_CONTAINER_BASE_STYLE);
       verifyComputedStyle(
         '[data-testid=ip-icon]',
@@ -31,7 +31,7 @@ describe('tests for Icon', () => {
     });
 
     it('icon tip should not be visible by default', () => {
-      cy.mount(<MaterialIconsPicker />);
+      cy.mount(<MaterialIconPicker />);
       cy.get('[data-testid=ip-iconContainer]').should('be.visible');
       cy.get('[data-testid=ip-icon]').should('be.visible');
       cy.get('[data-testid=ip-icon]').eq(0).should('have.text', MATERIAL_ICONS[0]);
@@ -39,7 +39,7 @@ describe('tests for Icon', () => {
     });
 
     it('icon tip should be visible after when mouse is hovered over icon container', () => {
-      cy.mount(<MaterialIconsPicker />);
+      cy.mount(<MaterialIconPicker />);
       cy.get('[data-testid=ip-iconContainer]').eq(0).trigger('mouseover');
       cy.get('[data-testid=ip-iconTip]').eq(0).should('be.visible');
       cy.get('[data-testid=ip-iconContainer]').eq(0).trigger('mouseout');
@@ -50,7 +50,7 @@ describe('tests for Icon', () => {
   describe('test props', () => {
     it('verify styles --iconTip', () => {
       cy.mount(
-        <MaterialIconsPicker
+        <MaterialIconPicker
           styles={{ iconTip: (baseStyle) => ({ ...baseStyle, border: '1px solid red' }) }}
         />,
       );
@@ -67,7 +67,7 @@ describe('tests for Icon', () => {
 
     it('verify styles -- iconContainer', () => {
       cy.mount(
-        <MaterialIconsPicker
+        <MaterialIconPicker
           styles={{ iconContainer: (baseStyle) => ({ ...baseStyle, border: '1px solid red' }) }}
         />,
       );
@@ -78,7 +78,7 @@ describe('tests for Icon', () => {
 
     it('verify styles -- icon', () => {
       cy.mount(
-        <MaterialIconsPicker
+        <MaterialIconPicker
           styles={{ icon: (baseStyle) => ({ ...baseStyle, border: '1px solid red' }) }}
         />,
       );
@@ -93,19 +93,19 @@ describe('tests for Icon', () => {
     });
 
     it('verify onIconClick -- onIconClick should be called when an icon container is clicked', () => {
-      cy.mount(<MaterialIconsPicker onIconClick={cy.stub().as('mockedOnIconClick')} />);
+      cy.mount(<MaterialIconPicker onIconClick={cy.stub().as('mockedOnIconClick')} />);
       cy.get('[data-testid=ip-iconContainer]').eq(0).click();
       cy.get('@mockedOnIconClick').should('have.been.calledOnceWith', MATERIAL_ICONS[0]);
     });
 
     it('verify onIconMouseEnter -- onIconMouseEnter should be called when an icon container is mouse entered', () => {
-      cy.mount(<MaterialIconsPicker onIconMouseEnter={cy.stub().as('mockedOnIconMouseEnter')} />);
+      cy.mount(<MaterialIconPicker onIconMouseEnter={cy.stub().as('mockedOnIconMouseEnter')} />);
       cy.get('[data-testid=ip-iconContainer]').eq(0).trigger('mouseover');
       cy.get('@mockedOnIconMouseEnter').should('have.been.calledOnceWith', MATERIAL_ICONS[0]);
     });
 
     it('verify setIconTipText -- setIconTipText should set icon tip content', () => {
-      cy.mount(<MaterialIconsPicker setIconTipText={(iconTipText) => `mocked${iconTipText}`} />);
+      cy.mount(<MaterialIconPicker setIconTipText={(iconTipText) => `mocked${iconTipText}`} />);
       cy.get('[data-testid=ip-iconTip]').eq(0).should('have.text', `mocked${MATERIAL_ICONS[0]}`);
     });
   });

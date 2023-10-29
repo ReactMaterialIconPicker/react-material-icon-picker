@@ -27,7 +27,7 @@ interface IStyles {
   iconsContainerPlaceholder?: StyleUpdater;
 }
 
-export interface MaterialIconsPickerProps {
+export interface MaterialIconPickerProps {
   styles?: IStyles;
   defaultSearchValue?: string;
   searchValue?: string;

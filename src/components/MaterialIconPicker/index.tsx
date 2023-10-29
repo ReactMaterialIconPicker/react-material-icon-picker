@@ -1,7 +1,7 @@
 import { memo, useState } from 'react';
 import { CONTAINER_BASE_STYLE, OPTION_CONTAINER_BASE_STYLE } from '../../lib/styles';
 import { IconSearch } from '../IconSearch';
-import { MaterialIconsPickerProps } from './types';
+import type { MaterialIconPickerProps } from './types';
 import { useMaterialIcons } from '../../lib/hooks';
 import { Hsva, Type } from '../../lib/types';
 import { ICON_TYPES } from '../../lib/constants';
@@ -9,7 +9,7 @@ import { TypeSelector } from '../TypeSelector';
 import { ColorSelector } from '../ColorSelector';
 import { Icons } from '../Icons';
 
-export const MaterialIconsPicker = memo((props: MaterialIconsPickerProps) => {
+export const MaterialIconPicker = memo((props: MaterialIconPickerProps) => {
   const {
     styles,
     defaultSearchValue,

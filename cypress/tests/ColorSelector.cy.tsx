@@ -10,7 +10,7 @@ import {
   SATURATION_BASE_STYLE,
 } from '../../src/lib/styles';
 import { verifyComputedStyle } from '../lib/util';
-import { MaterialIconsPicker } from '../../src';
+import { MaterialIconPicker } from '../../src';
 
 describe('tests for ColorSelector', () => {
   describe('test renders and interactions', () => {
@@ -63,7 +63,7 @@ describe('tests for ColorSelector', () => {
     });
 
     it('visible paletteContainer should not be hidden after clicking the palette', () => {
-      cy.mount(<MaterialIconsPicker />);
+      cy.mount(<MaterialIconPicker />);
       cy.get('[data-testid=ip-colorSelectorContainer]').click();
       cy.get('[data-testid=ip-paletteContainer]').should('be.visible');
       cy.get('[data-testid=ip-paletteSaturation').click();
@@ -72,7 +72,7 @@ describe('tests for ColorSelector', () => {
     });
 
     it('clicking paletteSaturation should change hsva', () => {
-      cy.mount(<MaterialIconsPicker />);
+      cy.mount(<MaterialIconPicker />);
       cy.get('[data-testid=ip-colorSelectorContainer]').click();
       cy.get('[data-testid=ip-paletteSaturation]').click(10, 10);
       cy.get('[data-testid=ip-colorSelected]').should(
@@ -84,7 +84,7 @@ describe('tests for ColorSelector', () => {
 
   describe('elements should have correct styles', () => {
     it('all elements should have the expected default styles', () => {
-      cy.mount(<MaterialIconsPicker />);
+      cy.mount(<MaterialIconPicker />);
       verifyComputedStyle(
         '[data-testid=ip-colorSelectorContainer]',
         COLOR_SELECTOR_CONTAINER_BASE_STYLE,
@@ -114,7 +114,7 @@ describe('tests for ColorSelector', () => {
   describe('test props', () => {
     it('test styles colorSelectorContainer', () => {
       cy.mount(
-        <MaterialIconsPicker
+        <MaterialIconPicker
           styles={{
             colorSelectorContainer: (baseStyle) => ({ ...baseStyle, border: '1px solid red' }),
           }}
@@ -128,7 +128,7 @@ describe('tests for ColorSelector', () => {
 
     it('test styles colorSelectedIndicator', () => {
       cy.mount(
-        <MaterialIconsPicker
+        <MaterialIconPicker
           styles={{
             colorSelectedIndicator: (baseStyle) => ({ ...baseStyle, border: '1px solid red' }),
           }}
@@ -146,7 +146,7 @@ describe('tests for ColorSelector', () => {
 
     it('test styles colorSelected', () => {
       cy.mount(
-        <MaterialIconsPicker
+        <MaterialIconPicker
           styles={{ colorSelected: (baseStyle) => ({ ...baseStyle, border: '1px solid red' }) }}
         />,
       );
@@ -162,7 +162,7 @@ describe('tests for ColorSelector', () => {
 
     it('test styles colorSelectorArrow', () => {
       cy.mount(
-        <MaterialIconsPicker
+        <MaterialIconPicker
           styles={{
             colorSelectorArrow: (baseStyle) => ({ ...baseStyle, border: '1px solid red' }),
           }}
@@ -180,7 +180,7 @@ describe('tests for ColorSelector', () => {
 
     it('test styles paletteContainer', () => {
       cy.mount(
-        <MaterialIconsPicker
+        <MaterialIconPicker
           styles={{ paletteContainer: (baseStyle) => ({ ...baseStyle, border: '1px solid red' }) }}
         />,
       );
@@ -193,7 +193,7 @@ describe('tests for ColorSelector', () => {
 
     it('test styles saturation', () => {
       cy.mount(
-        <MaterialIconsPicker
+        <MaterialIconPicker
           styles={{ saturation: (baseStyle) => ({ ...baseStyle, border: '1px solid red' }) }}
         />,
       );
@@ -210,7 +210,7 @@ describe('tests for ColorSelector', () => {
 
     it('test styles hue', () => {
       cy.mount(
-        <MaterialIconsPicker
+        <MaterialIconPicker
           styles={{ hue: (baseStyle) => ({ ...baseStyle, border: '1px solid red' }) }}
         />,
       );
@@ -240,7 +240,7 @@ describe('tests for ColorSelector', () => {
     });
 
     it('test hsva -- hsva should disable changing hsva', () => {
-      cy.mount(<MaterialIconsPicker hsva={{ h: 1, s: 1, v: 1, a: 1 }} />);
+      cy.mount(<MaterialIconPicker hsva={{ h: 1, s: 1, v: 1, a: 1 }} />);
       cy.get('[data-testid=ip-colorSelectorContainer]').click();
       cy.get('[data-testid=ip-paletteSaturation]').click(10, 10);
       cy.get('[data-testid=ip-colorSelected]').should(
@@ -250,7 +250,7 @@ describe('tests for ColorSelector', () => {
     });
 
     it('test onHsvaChange -- onHsvaChange should be invoked when hsva is changed', () => {
-      cy.mount(<MaterialIconsPicker onHsvaChange={cy.stub().as('mockedOnHsvaChange')} />);
+      cy.mount(<MaterialIconPicker onHsvaChange={cy.stub().as('mockedOnHsvaChange')} />);
       cy.get('[data-testid=ip-colorSelectorContainer]').click();
       cy.get('[data-testid=ip-paletteSaturation]').click(10, 10);
       cy.get('@mockedOnHsvaChange').should('have.been.calledOnce');
@@ -258,7 +258,7 @@ describe('tests for ColorSelector', () => {
 
     it('test onHsvaChange -- onHsvaChange should be invoked even when hsva is present', () => {
       cy.mount(
-        <MaterialIconsPicker
+        <MaterialIconPicker
           onHsvaChange={cy.stub().as('mockedOnHsvaChange')}
           hsva={{ h: 1, s: 1, v: 1, a: 1 }}
         />,

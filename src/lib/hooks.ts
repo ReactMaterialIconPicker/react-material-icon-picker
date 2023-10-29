@@ -90,7 +90,7 @@ export const useDebounce = (
 
   return (...args: unknown[]) => {
     if (timerRef.current) clearTimeout(timerRef.current);
-    timerRef.current = setTimeout(() => {
+    timerRef.current = window.setTimeout(() => {
       callback.apply(null, args);
       timerRef.current = null;
     }, delay);
@@ -123,7 +123,7 @@ export const useThrottle = (
     if (!waiting.current) {
       callback.call(null, ...args);
       waiting.current = true;
-      timerRef.current = setTimeout(() => {
+      timerRef.current = window.setTimeout(() => {
         waiting.current = false;
       }, limit);
     }

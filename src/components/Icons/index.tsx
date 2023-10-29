@@ -141,7 +141,7 @@ export const Icons = (props: IconsProps) => {
   useEffect(() => {
     if(disableLoader) return;
     if(loading) {
-      loaderTimeoutRef.current = setTimeout(() => {
+      loaderTimeoutRef.current = window.setTimeout(() => {
         setLoading(false);
         setIconNumber((num) =>
           Math.min(num + 3 * iconNumbersRef.current.actualColumnCount, iconSearchResults.length),

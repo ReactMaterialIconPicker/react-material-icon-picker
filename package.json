@@ -2,8 +2,8 @@
   "name": "react-material-icons-picker",
   "version": "1.0.0",
   "description": "react material icons picker component",
-  "main": "./dist/bundle.js",
-  "types": "./dist/src/index.d.ts",
+  "main": "dist/bundle.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "start": "webpack-dev-server --mode development --open --hot",
     "build": "webpack --config webpack.prod.js",

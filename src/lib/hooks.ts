@@ -1,5 +1,8 @@
 import { DependencyList, RefObject, useEffect, useRef, useState } from 'react';
 
+/**
+ * Enable material icons
+ */
 export const useMaterialIcons = () => {
   useEffect(() => {
     const head = document.querySelector('head');
@@ -20,6 +23,12 @@ export const useMaterialIcons = () => {
   }, []);
 };
 
+/**
+ * Fire a callback function when an event happens outside of a set of elements
+ * @param eventType the event to listen to
+ * @param callback the callback function to be fired
+ * @param elementRefs an array of elements
+ */
 export const useEventOutside = (
   eventType: string,
   callback: () => void,
@@ -41,7 +50,10 @@ export const useEventOutside = (
   }, []);
 };
 
-// This hook listens to the resizing of an element
+/**
+ * Listen to the resizing of an element
+ * @returns Ref object of the element to listen to, width and height of the element
+ */
 export const useElementSize = <T extends Element>(): [
   elementRef: RefObject<T>,
   width: number,
@@ -132,6 +144,10 @@ export const useThrottle = (
   return throttledCallback;
 };
 
+/**
+ * Set a clean up function for a component
+ * @param cleanUp the clean up function
+ */
 export const useCleanUp = (cleanUp: () => void) => {
   useEffect(() => {
     return cleanUp;

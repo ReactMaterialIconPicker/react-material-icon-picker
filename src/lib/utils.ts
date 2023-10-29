@@ -1,11 +1,20 @@
 import { RefObject } from 'react';
-import { StyleObject, StyleUpdater } from './types';
 
-export const getUpdatedStyle = (baseStyle: StyleObject, styleUpdater?: StyleUpdater) =>
-  styleUpdater ? styleUpdater(baseStyle) : baseStyle;
-
+/**
+ * Check if a variable is a function
+ * @param f the variable to be checked
+ * @returns true if f is a function
+ */
 export const isFunction = (f: unknown): f is Function => typeof f === 'function';
 
+/**
+ * Get the top and left position of an icon tip in px
+ * @param params
+ * @param params.iconsContainerRef the ref object of the icons container
+ * @param params.iconContainerRef the ref object of the icon container
+ * @param iconTipRef the ref object of the icon tip
+ * @returns top and left in px
+ */
 export const getIconTipTopLeft = ({
   iconsContainerRef,
   iconContainerRef,
@@ -43,6 +52,11 @@ export const getIconTipTopLeft = ({
   return { top: iconTipTop, left: iconTipLeft };
 };
 
+/**
+ * Count the number of elements in a row in a flexbox with wrap
+ * @param elements all elements within the flexbox
+ * @returns the number of elements in a row
+ */
 export const countNumberOfElementsInRow = (elements: NodeListOf<HTMLElement>): number => {
   if (elements.length === 0) return 0;
 
@@ -65,6 +79,11 @@ export const countNumberOfElementsInRow = (elements: NodeListOf<HTMLElement>): n
   return count;
 };
 
+/**
+ * Count the number of elements in column in a flexbox with wrap
+ * @param container the icons container
+ * @returns the number of elements in a column
+ */
 export const countNumberOfElementsInColumn = (container: HTMLDivElement): number => {
   const iconPlaceholders = Array.from(container.querySelectorAll('[data-testid=ip-iconPlaceholderContainer]'));
   const containerClientHeight = container.clientHeight;
@@ -82,6 +101,11 @@ export const countNumberOfElementsInColumn = (container: HTMLDivElement): number
   return row;
 };
 
+/**
+ * Get the distance in px from bottom border of a child to the top border of its parent
+ * @param childElement the child element
+ * @returns the distance
+ */
 export const getDistanceToTopBorder = (childElement: Element): number => {
   // Get the child element's bottom offset relative to the viewport
   const childRect = childElement.getBoundingClientRect().bottom;
@@ -97,6 +121,11 @@ export const getDistanceToTopBorder = (childElement: Element): number => {
   return distanceToTopBorder;
 };
 
+/**
+ * Get the content width of an element
+ * @param element the element
+ * @returns content with in px
+ */
 export const getContentWidth = (element: Element) => {
   const computedStyles = window.getComputedStyle(element);
   const paddingLeft = parseFloat(computedStyles.paddingLeft);
@@ -107,6 +136,11 @@ export const getContentWidth = (element: Element) => {
   return contentWidth;
 };
 
+/**
+ * Get the content height of an element
+ * @param element the element
+ * @returns content height in px
+ */
 export const getContentHeight = (element: Element) => {
   const computedStyles = window.getComputedStyle(element);
   const paddingTop = parseFloat(computedStyles.paddingTop);

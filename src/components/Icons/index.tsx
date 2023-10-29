@@ -28,8 +28,8 @@ export const Icons = (props: IconsProps) => {
   });
   const initialRenderRef = useRef<boolean>(true);
   const loaderTimeoutRef = useRef<number>(0);
-  const updateIcons = useThrottle(() => setIconPlaceholderState(0), 500);
-  const deboucnedRerenderIcons = useDebounce(() => updateIcons(), 500);
+  const updateIcons = useThrottle(() => setIconPlaceholderState(0), 100);
+  const deboucnedRerenderIcons = useDebounce(() => updateIcons(), 100);
   const iconSearchResults = String(iconSearch) !== ''
     ? MATERIAL_ICONS.filter((s) => s.toLowerCase().includes(iconSearch.toLowerCase()))
     : MATERIAL_ICONS;

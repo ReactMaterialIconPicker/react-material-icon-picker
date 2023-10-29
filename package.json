@@ -1,6 +1,6 @@
 {
   "name": "react-material-icon-picker",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "react material icon picker component",
   "main": "dist/bundle.js",
   "types": "dist/index.d.ts",

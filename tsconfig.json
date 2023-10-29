@@ -10,8 +10,7 @@
     "allowJs": true,
     "moduleResolution": "node",
     "declaration": true,
-    "jsx": "react-jsx",
-    "types": ["cypress"]
+    "jsx": "react-jsx"
   },
   "include": ["src", "globals.d.ts"]
 }

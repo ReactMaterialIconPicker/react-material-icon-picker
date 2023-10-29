@@ -34,8 +34,7 @@ module.exports = {
         test: /\.(tsx|ts)?$/,
         use: 'ts-loader',
         exclude: [
-          /node_modules/,
-          path.join(__dirname, '/cypress')
+          /node_modules/
         ],
       },
     ],

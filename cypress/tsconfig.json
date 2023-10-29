@@ -12,6 +12,6 @@
       "jsx": "react-jsx",
       "types": ["cypress"]
     },
-    "include": ["../cypress"]
+    "include": ["../cypress", "../globals.d.ts"]
   }
   

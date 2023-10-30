@@ -1,6 +1,7 @@
 .DS_Store
 .github/
 cypress/
+docs/
 jest/
 node_modules/
 src/

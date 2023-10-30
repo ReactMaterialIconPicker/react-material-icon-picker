@@ -16,38 +16,31 @@ npm install react-material-icon-picker
 ## Usage
 
 ```ts
-import { myPackage } from 'my-package-name';
+import { MaterialIconPicker } from 'react-material-icon-picker';
 
-myPackage('hello');
-//=> 'hello from my package'
+const MyComponent = () => {
+    return <MaterialIconPicker />
+}
 ```
 
-## API
-
-### myPackage(input, options?)
-
-#### input
-
-Type: `string`
-
-Lorem ipsum.
-
-#### options
-
-Type: `object`
-
-##### postfix
-
-Type: `string`
-Default: `rainbows`
-
-Lorem ipsum.
+## Demo
+![image info](./docs/pics/demo.gif)
 
 
 
 [npm-img]:https://img.shields.io/npm/v/react-material-icon-picker
 [npm-url]:https://www.npmjs.com/package/react-material-icon-picker
 
+[![Edit ReactMaterialIconPicker](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/vigilant-glade-vj69k5?file=/src/App.jsx)
+
+
+## Contributing
+
+Your contribution is greatly appreciated! Feel free to fork the repo, make some changes, submit a pull-request! You may also submit a issue to report any bug:)
+
+## License
+
+MIT
 
 
 [build-img]:https://github.com/ryansonshine/typescript-npm-package-template/actions/workflows/release.yml/badge.svg

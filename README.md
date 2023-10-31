@@ -23,7 +23,108 @@ const MyComponent = () => {
 }
 ```
 
-Documentation for props will be added shortly
+## Props
+
+Documentation for props is still being updated. Please feel free to submit an issue on Github to suggest props that could be useful.
+
+**defaultSearchValue?: string**<br>
+A default value for the search input box
+
+**searchValue?: string**<br>
+A fixed value for the search input box<br>
+`searchValue` overrides `defaultSearchValue`
+
+**onSearchValueChange?: (value: string) => void**<br>
+A function that will be called when value of the search input box changes
+
+**onSearchValueSettled?: (value: string) => void**<br>
+A function that will be called when a new search value is settled
+- when 'return' key is hit when focusing on the search input box or
+- the Magnifying Glass icon is clicked
+
+**searchBoxPlaceholder?: string**<br>
+The placeholder value of the search input box
+
+**type?: Type**<br>
+type of material icons
+```
+type Type = {
+  label: string;
+  value: string;
+};
+```
+
+**onTypeChange?: (type: Type) => void**<br>
+A function that will be called when a new type is selected
+
+**hsva?: Hsva**<br>
+A fixed value for the color of material icons
+```
+type Hsva = {
+  h: number;
+  s: number;
+  v: number;
+  a: number;
+};
+```
+
+**onHsvaChange?: (hsva: Hsva) => void**<br>
+A function that will be called when the color of material icons changes
+
+**onIconClick?: (icon: string) => void**<br>
+A function that will be called when an icon is clicked
+
+**onIconMouseEnter?: (icon: string) => void**<br>
+A function that will be called when an icon is mouse entered
+
+**setIconTipText?: (icon: string) => string**<br>
+A function that customize icon tip
+
+**onIconsScroll?: (e: React.SyntheticEvent) => void**<br>
+
+A function that is called when the icons container is scrolled
+
+**disableLoader?: boolean**<br>
+If true, disable the loader icon when user scrolls to the bottom (`false` as default)
+
+**styles?: IStyles**<br>
+Custom style of elements of the component
+```
+/*
+StyleUpdater takes the original style of the element and returns the custom style of the element
+*/
+
+interface IStyles {
+  container?: StyleUpdater;
+  searchContainer?: StyleUpdater;
+  searchIcon?: StyleUpdater;
+  searchInput?: StyleUpdater;
+  optionContainer?: StyleUpdater;
+  typeContainer?: StyleUpdater;
+  typeSelected?: StyleUpdater;
+  typeArrow?: StyleUpdater;
+  typeOptionsContainer?: StyleUpdater;
+  typeOption?: StyleUpdater;
+  colorSelectorContainer?: StyleUpdater;
+  colorSelectedIndicator?: StyleUpdater;
+  colorSelected?: StyleUpdater;
+  colorSelectorArrow?: StyleUpdater;
+  paletteContainer?: StyleUpdater;
+  saturation?: StyleUpdater;
+  hue?: StyleUpdater;
+  iconsContainer?: StyleUpdater;
+  iconContainer?: StyleUpdater;
+  icon?: StyleUpdater;
+  iconTip?: StyleUpdater;
+  loaderContainer?: StyleUpdater;
+  loader?: StyleUpdater;
+  iconsContainerPlaceholder?: StyleUpdater;
+}
+
+type StyleObject = Record<string, string | number>;
+type StyleUpdater = (baseStyle: StyleObject) => StyleObject;
+```
+
 
 ## Demo
 ![image info](./docs/pics/demo.gif)

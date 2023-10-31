@@ -23,6 +23,8 @@ const MyComponent = () => {
 }
 ```
 
+Documentation for props will be added shortly
+
 ## Demo
 ![image info](./docs/pics/demo.gif)
 

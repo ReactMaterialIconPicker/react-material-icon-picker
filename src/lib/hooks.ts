@@ -64,17 +64,16 @@ export const useElementSize = <T extends Element>(): [
   const [height, setHeight] = useState<number>(0);
 
   useEffect(() => {
-
-    const resizeObserver = new ResizeObserver(entries => {
+    const resizeObserver = new ResizeObserver((entries) => {
       const entry = entries[0];
-      if(entry) {
+      if (entry) {
         const contentRect = entry.contentRect;
-        if(contentRect) {
+        if (contentRect) {
           setWidth(contentRect.width);
           setHeight(contentRect.height);
         }
       }
-    })
+    });
     elementRef.current && resizeObserver.observe(elementRef.current);
     return () => resizeObserver.disconnect();
   }, []);
@@ -176,11 +175,11 @@ export const useIsFirstRender = () => {
  * @param deps the dependencies of the effect
  */
 export const useEffectUpdate = (effect: any, deps: any) => {
-  const isFirst = useIsFirstRender()
+  const isFirst = useIsFirstRender();
 
   useEffect(() => {
     if (!isFirst) {
-      return effect()
+      return effect();
     }
   }, deps);
 };

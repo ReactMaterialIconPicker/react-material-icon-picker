@@ -85,14 +85,17 @@ export const countNumberOfElementsInRow = (elements: NodeListOf<HTMLElement>): n
  * @returns the number of elements in a column
  */
 export const countNumberOfElementsInColumn = (container: HTMLDivElement): number => {
-  const iconPlaceholders = Array.from(container.querySelectorAll('[data-testid=ip-iconPlaceholderContainer]'));
+  const iconPlaceholders = Array.from(
+    container.querySelectorAll('[data-testid=ip-iconPlaceholderContainer]'),
+  );
   const containerClientHeight = container.clientHeight;
-  let row = 0, prevDistance = 0;
+  let row = 0,
+    prevDistance = 0;
 
-  for(let i = 0; i < iconPlaceholders.length; ++i) {
+  for (let i = 0; i < iconPlaceholders.length; ++i) {
     const distance = getDistanceToTopBorder(iconPlaceholders[i]);
-    if(distance > containerClientHeight) return row;
-    if(distance !== prevDistance) {
+    if (distance > containerClientHeight) return row;
+    if (distance !== prevDistance) {
       row++;
       prevDistance = distance;
     }
@@ -113,7 +116,7 @@ export const getDistanceToTopBorder = (childElement: Element): number => {
   // Get the scrollable parent element
   const parentElement = childElement.parentElement;
 
-  if(!parentElement) return 0;
+  if (!parentElement) return 0;
 
   // Calculate the distance from the child to the top border of the scrollable parent
   const distanceToTopBorder = childRect - parentElement.getBoundingClientRect().top;
@@ -131,8 +134,9 @@ export const getContentWidth = (element: Element) => {
   const paddingLeft = parseFloat(computedStyles.paddingLeft);
   const paddingRight = parseFloat(computedStyles.paddingRight);
   const borderLeft = parseFloat(computedStyles.borderLeftWidth);
-  const borderRight = parseFloat(computedStyles.borderRightWidth);  
-  const contentWidth = element.clientWidth - (paddingLeft + paddingRight + borderLeft + borderRight); 
+  const borderRight = parseFloat(computedStyles.borderRightWidth);
+  const contentWidth =
+    element.clientWidth - (paddingLeft + paddingRight + borderLeft + borderRight);
   return contentWidth;
 };
 
@@ -148,7 +152,8 @@ export const getContentHeight = (element: Element) => {
   const borderTop = parseFloat(computedStyles.borderTopWidth);
   const borderBottom = parseFloat(computedStyles.borderBottomWidth);
 
-  const contentHeight = element.clientHeight - (paddingTop + paddingBottom + borderTop + borderBottom);
+  const contentHeight =
+    element.clientHeight - (paddingTop + paddingBottom + borderTop + borderBottom);
 
   return contentHeight;
 };

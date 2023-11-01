@@ -1,17 +1,43 @@
 import { MATERIAL_ICONS } from '../../assets/materialIcons';
 import LoaderIcon from '../../assets/icons/loading.svg';
-import { ICONS_CONTAINER_BASE_STYLE, LOADER_BASE_STYLE, LOADER_CONTAINER_BASE_STYLE } from '../../lib/styles';
+import {
+  ICONS_CONTAINER_BASE_STYLE,
+  LOADER_BASE_STYLE,
+  LOADER_CONTAINER_BASE_STYLE,
+} from '../../lib/styles';
 import type { IconsProps } from './types';
-import { useCleanUp, useDebounce, useEffectUpdate, useElementSize, useThrottle } from '../../lib/hooks';
+import {
+  useCleanUp,
+  useDebounce,
+  useEffectUpdate,
+  useElementSize,
+  useThrottle,
+} from '../../lib/hooks';
 import { useEffect, useRef, useState } from 'react';
-import { countNumberOfElementsInRow, isFunction, countNumberOfElementsInColumn, getContentWidth, getContentHeight } from '../../lib/utils';
+import {
+  countNumberOfElementsInRow,
+  isFunction,
+  countNumberOfElementsInColumn,
+  getContentWidth,
+  getContentHeight,
+} from '../../lib/utils';
 import { Icon } from '../Icon';
 import { IconPlaceholder } from '../IconPlaceholder';
 import cssStyles from './index.module.css';
 
 export const Icons = (props: IconsProps) => {
-  const { styles, type, hsva, onIconClick, onIconMouseEnter, setIconTipText, iconSearch, onIconsChange, onIconsScroll, disableLoader } =
-    props || {};
+  const {
+    styles,
+    type,
+    hsva,
+    onIconClick,
+    onIconMouseEnter,
+    setIconTipText,
+    iconSearch,
+    onIconsChange,
+    onIconsScroll,
+    disableLoader,
+  } = props || {};
 
   const { iconsContainer, loaderContainer, loader } = styles || {};
 
@@ -30,23 +56,21 @@ export const Icons = (props: IconsProps) => {
   const loaderTimeoutRef = useRef<number>(0);
   const updateIcons = useThrottle(() => setIconPlaceholderState(0), 300);
   const deboucnedRerenderIcons = useDebounce(() => updateIcons(), 300);
-  const iconSearchResults = String(iconSearch) !== ''
-    ? MATERIAL_ICONS.filter((s) => s.toLowerCase().includes(iconSearch.toLowerCase()))
-    : MATERIAL_ICONS;
+  const iconSearchResults =
+    String(iconSearch) !== ''
+      ? MATERIAL_ICONS.filter((s) => s.toLowerCase().includes(iconSearch.toLowerCase()))
+      : MATERIAL_ICONS;
 
   const renderIcons = () => {
     if (iconPlaceholderState === 0) return <IconPlaceholder styles={styles} />;
     else if (iconPlaceholderState === 1) {
       return new Array(
-        iconNumbersRef.current.maxColumnCount * (iconNumbersRef.current.maxRowCount),
+        iconNumbersRef.current.maxColumnCount * iconNumbersRef.current.maxRowCount,
       ).fill(<IconPlaceholder styles={styles} />);
     } else if (iconPlaceholderState === 2) {
       return [
         ...iconSearchResults
-          .slice(
-            0,
-            iconNumber,
-          )
+          .slice(0, iconNumber)
           .map((icon) => (
             <Icon
               icon={icon}
@@ -65,27 +89,34 @@ export const Icons = (props: IconsProps) => {
   };
 
   const renderEndingIconPlaceholders = () => {
-    if(iconNumbersRef.current.actualColumnCount * iconNumbersRef.current.actualRowCount > iconNumber) {
-      return new Array(iconNumbersRef.current.actualColumnCount * iconNumbersRef.current.actualRowCount - iconNumber).fill(<IconPlaceholder styles={styles}/>);
-    }
-    else if(iconNumber % iconNumbersRef.current.actualColumnCount !== 0) {
-      return new Array(iconNumbersRef.current.actualColumnCount - iconNumber % iconNumbersRef.current.actualColumnCount).fill(<IconPlaceholder styles={styles}/>);
+    if (
+      iconNumbersRef.current.actualColumnCount * iconNumbersRef.current.actualRowCount >
+      iconNumber
+    ) {
+      return new Array(
+        iconNumbersRef.current.actualColumnCount * iconNumbersRef.current.actualRowCount -
+          iconNumber,
+      ).fill(<IconPlaceholder styles={styles} />);
+    } else if (iconNumber % iconNumbersRef.current.actualColumnCount !== 0) {
+      return new Array(
+        iconNumbersRef.current.actualColumnCount -
+          (iconNumber % iconNumbersRef.current.actualColumnCount),
+      ).fill(<IconPlaceholder styles={styles} />);
     }
 
     return [];
   };
 
   const onIconsContainerScroll = (event: React.SyntheticEvent) => {
-    if(isFunction(onIconsScroll)) onIconsScroll(event);
+    if (isFunction(onIconsScroll)) onIconsScroll(event);
     const eventTarget = event.target as HTMLDivElement;
     // scrolled to the bottom
     if (eventTarget.scrollTop + eventTarget.clientHeight >= eventTarget.scrollHeight) {
-      if(disableLoader) {
+      if (disableLoader) {
         setIconNumber((num) =>
           Math.min(num + 3 * iconNumbersRef.current.actualColumnCount, iconSearchResults.length),
         );
-      }
-      else {
+      } else {
         setLoading(true);
       }
     }
@@ -106,11 +137,19 @@ export const Icons = (props: IconsProps) => {
         height: rect?.height || 0,
       };
 
-      const iconsContainerContentWidth = getContentWidth(iconsContainerRef.current as HTMLDivElement);
-      const iconsContainerContentHeight = getContentHeight(iconsContainerRef.current as HTMLDivElement);
+      const iconsContainerContentWidth = getContentWidth(
+        iconsContainerRef.current as HTMLDivElement,
+      );
+      const iconsContainerContentHeight = getContentHeight(
+        iconsContainerRef.current as HTMLDivElement,
+      );
 
-      iconNumbersRef.current.maxColumnCount = Math.floor(iconsContainerContentWidth / iconContainerDimensionPxRef.current.width);
-      iconNumbersRef.current.maxRowCount = Math.floor(iconsContainerContentHeight / iconContainerDimensionPxRef.current.height);
+      iconNumbersRef.current.maxColumnCount = Math.floor(
+        iconsContainerContentWidth / iconContainerDimensionPxRef.current.width,
+      );
+      iconNumbersRef.current.maxRowCount = Math.floor(
+        iconsContainerContentHeight / iconContainerDimensionPxRef.current.height,
+      );
 
       setIconPlaceholderState(1);
     } else if (iconPlaceholderState === 1) {
@@ -119,11 +158,19 @@ export const Icons = (props: IconsProps) => {
           '[data-testid=ip-iconPlaceholderContainer]',
         ),
       );
-      iconNumbersRef.current.actualRowCount = countNumberOfElementsInColumn(iconsContainerRef.current as HTMLDivElement);
+      iconNumbersRef.current.actualRowCount = countNumberOfElementsInColumn(
+        iconsContainerRef.current as HTMLDivElement,
+      );
 
-      let initIconNumber = iconNumbersRef.current.actualColumnCount * iconNumbersRef.current.actualRowCount;
-      if(iconSearchResults.length > initIconNumber) initIconNumber = Math.min(iconSearchResults.length, initIconNumber + iconNumbersRef.current.actualColumnCount * 2);
-      else if(iconSearchResults.length <= initIconNumber) initIconNumber = iconSearchResults.length;
+      let initIconNumber =
+        iconNumbersRef.current.actualColumnCount * iconNumbersRef.current.actualRowCount;
+      if (iconSearchResults.length > initIconNumber)
+        initIconNumber = Math.min(
+          iconSearchResults.length,
+          initIconNumber + iconNumbersRef.current.actualColumnCount * 2,
+        );
+      else if (iconSearchResults.length <= initIconNumber)
+        initIconNumber = iconSearchResults.length;
       setIconNumber(initIconNumber);
 
       setIconPlaceholderState(2);
@@ -133,15 +180,18 @@ export const Icons = (props: IconsProps) => {
   useEffect(() => {
     if (initialRenderRef.current && iconsContainerWidth !== 0 && iconsContainerHeight !== 0) {
       initialRenderRef.current = false;
-    }
-    else if (!initialRenderRef.current && iconsContainerWidth !== 0 && iconsContainerHeight !== 0) {
+    } else if (
+      !initialRenderRef.current &&
+      iconsContainerWidth !== 0 &&
+      iconsContainerHeight !== 0
+    ) {
       deboucnedRerenderIcons();
     }
   }, [iconsContainerWidth, iconsContainerHeight]);
 
   useEffect(() => {
-    if(disableLoader) return;
-    if(loading) {
+    if (disableLoader) return;
+    if (loading) {
       loaderTimeoutRef.current = window.setTimeout(() => {
         setLoading(false);
         setIconNumber((num) =>
@@ -152,7 +202,7 @@ export const Icons = (props: IconsProps) => {
   }, [loading, disableLoader]);
 
   useEffect(() => {
-    if(isFunction(onIconsChange)) onIconsChange(iconSearchResults.slice(0, iconNumber));
+    if (isFunction(onIconsChange)) onIconsChange(iconSearchResults.slice(0, iconNumber));
   }, [iconSearchResults, iconNumber]);
 
   useCleanUp(() => {
@@ -171,17 +221,23 @@ export const Icons = (props: IconsProps) => {
       data-testid="ip-iconsContainer"
     >
       {renderIcons()}
-      {loading && <div
-        style={isFunction(loaderContainer) ? loaderContainer(LOADER_CONTAINER_BASE_STYLE) : LOADER_CONTAINER_BASE_STYLE}
-        data-testid='ip-loaderContainer'
-      >
-        <img
-          src={LoaderIcon}
-          style={isFunction(loader) ? loader(LOADER_BASE_STYLE) : LOADER_BASE_STYLE}
-          data-testid='ip-loader'
-          className={cssStyles['ip-rotate']}
-        />
-      </div>}
+      {loading && (
+        <div
+          style={
+            isFunction(loaderContainer)
+              ? loaderContainer(LOADER_CONTAINER_BASE_STYLE)
+              : LOADER_CONTAINER_BASE_STYLE
+          }
+          data-testid="ip-loaderContainer"
+        >
+          <img
+            src={LoaderIcon}
+            style={isFunction(loader) ? loader(LOADER_BASE_STYLE) : LOADER_BASE_STYLE}
+            data-testid="ip-loader"
+            className={cssStyles['ip-rotate']}
+          />
+        </div>
+      )}
     </div>
   );
 };

@@ -1,17 +1,16 @@
 {
-    "compilerOptions": {
-      "target": "ES2017",
-      "module": "es6",
-      "strictNullChecks": true,
-      "strict": true,
-      "esModuleInterop": true,
-      "noImplicitAny": true,
-      "allowJs": true,
-      "moduleResolution": "node",
-      "declaration": true,
-      "jsx": "react-jsx",
-      "types": ["cypress"]
-    },
-    "include": ["../cypress", "../globals.d.ts"]
-  }
-  
+  "compilerOptions": {
+    "target": "ES2017",
+    "module": "es6",
+    "strictNullChecks": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "noImplicitAny": true,
+    "allowJs": true,
+    "moduleResolution": "node",
+    "declaration": true,
+    "jsx": "react-jsx",
+    "types": ["cypress"]
+  },
+  "include": ["../cypress", "../globals.d.ts"]
+}

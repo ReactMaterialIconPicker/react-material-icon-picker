@@ -1,5 +1,5 @@
-import { MaterialIconPicker } from "../../src";
+import { MaterialIconPicker } from '../../src';
 
 it('dev', () => {
-    cy.mount(<MaterialIconPicker />);
+  cy.mount(<MaterialIconPicker />);
 });

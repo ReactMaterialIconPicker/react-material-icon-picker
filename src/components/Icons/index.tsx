@@ -2,7 +2,7 @@ import { MATERIAL_ICONS } from '../../assets/materialIcons';
 import LoaderIcon from '../../assets/icons/loading.svg';
 import { ICONS_CONTAINER_BASE_STYLE, LOADER_BASE_STYLE, LOADER_CONTAINER_BASE_STYLE } from '../../lib/styles';
 import type { IconsProps } from './types';
-import { useCleanUp, useDebounce, useElementSize, useThrottle } from '../../lib/hooks';
+import { useCleanUp, useDebounce, useEffectUpdate, useElementSize, useThrottle } from '../../lib/hooks';
 import { useEffect, useRef, useState } from 'react';
 import { countNumberOfElementsInRow, isFunction, countNumberOfElementsInColumn, getContentWidth, getContentHeight } from '../../lib/utils';
 import { Icon } from '../Icon';
@@ -28,8 +28,8 @@ export const Icons = (props: IconsProps) => {
   });
   const initialRenderRef = useRef<boolean>(true);
   const loaderTimeoutRef = useRef<number>(0);
-  const updateIcons = useThrottle(() => setIconPlaceholderState(0), 100);
-  const deboucnedRerenderIcons = useDebounce(() => updateIcons(), 100);
+  const updateIcons = useThrottle(() => setIconPlaceholderState(0), 300);
+  const deboucnedRerenderIcons = useDebounce(() => updateIcons(), 300);
   const iconSearchResults = String(iconSearch) !== ''
     ? MATERIAL_ICONS.filter((s) => s.toLowerCase().includes(iconSearch.toLowerCase()))
     : MATERIAL_ICONS;
@@ -38,7 +38,7 @@ export const Icons = (props: IconsProps) => {
     if (iconPlaceholderState === 0) return <IconPlaceholder styles={styles} />;
     else if (iconPlaceholderState === 1) {
       return new Array(
-        iconNumbersRef.current.maxColumnCount * iconNumbersRef.current.maxRowCount,
+        iconNumbersRef.current.maxColumnCount * (iconNumbersRef.current.maxRowCount),
       ).fill(<IconPlaceholder styles={styles} />);
     } else if (iconPlaceholderState === 2) {
       return [
@@ -87,12 +87,11 @@ export const Icons = (props: IconsProps) => {
       }
       else {
         setLoading(true);
-        if(iconsContainerRef.current) iconsContainerRef.current.style.overflowY = 'hidden';
       }
     }
   };
 
-  useEffect(() => {
+  useEffectUpdate(() => {
     setIconPlaceholderState(0);
   }, [iconSearch]);
 
@@ -132,9 +131,10 @@ export const Icons = (props: IconsProps) => {
   }, [iconPlaceholderState]);
 
   useEffect(() => {
-    if (initialRenderRef.current && iconsContainerWidth && iconsContainerHeight)
+    if (initialRenderRef.current && iconsContainerWidth !== 0 && iconsContainerHeight !== 0) {
       initialRenderRef.current = false;
-    else if (!initialRenderRef.current && iconsContainerWidth && iconsContainerHeight) {
+    }
+    else if (!initialRenderRef.current && iconsContainerWidth !== 0 && iconsContainerHeight !== 0) {
       deboucnedRerenderIcons();
     }
   }, [iconsContainerWidth, iconsContainerHeight]);
@@ -147,7 +147,6 @@ export const Icons = (props: IconsProps) => {
         setIconNumber((num) =>
           Math.min(num + 3 * iconNumbersRef.current.actualColumnCount, iconSearchResults.length),
         );
-        if(iconsContainerRef.current) iconsContainerRef.current.style.overflowY = 'auto';
       }, 500);
     }
   }, [loading, disableLoader]);

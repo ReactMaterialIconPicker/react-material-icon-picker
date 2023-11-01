@@ -6,6 +6,16 @@
 
 If you like the project, please give the project a GitHub 🌟
 
+## Demo
+![image info](./docs/pics/demo.gif)
+
+
+
+[npm-img]:https://img.shields.io/npm/v/react-material-icon-picker
+[npm-url]:https://www.npmjs.com/package/react-material-icon-picker
+
+[![Edit ReactMaterialIconPicker](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/vigilant-glade-vj69k5?file=/src/App.jsx)
+
 
 ## Install
 
@@ -19,9 +29,15 @@ npm install react-material-icon-picker
 import { MaterialIconPicker } from 'react-material-icon-picker';
 
 const MyComponent = () => {
-    return <MaterialIconPicker />
+    return <div>
+      <MaterialIconPicker />
+    </div>;
 }
 ```
+Please make sure that
+- there is a container for `<MaterialIconPicker />`
+- and the container has a fixed `width` (either absolute or relative)
+- width values like `auto` will be supported soon
 
 ## Props
 
@@ -124,18 +140,6 @@ interface IStyles {
 type StyleObject = Record<string, string | number>;
 type StyleUpdater = (baseStyle: StyleObject) => StyleObject;
 ```
-
-
-## Demo
-![image info](./docs/pics/demo.gif)
-
-
-
-[npm-img]:https://img.shields.io/npm/v/react-material-icon-picker
-[npm-url]:https://www.npmjs.com/package/react-material-icon-picker
-
-[![Edit ReactMaterialIconPicker](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/vigilant-glade-vj69k5?file=/src/App.jsx)
-
 
 ## Contributing
 

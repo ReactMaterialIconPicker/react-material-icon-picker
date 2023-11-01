@@ -64,16 +64,17 @@ export const useElementSize = <T extends Element>(): [
   const [height, setHeight] = useState<number>(0);
 
   useEffect(() => {
-    const resizeObserver = new ResizeObserver(
-      ([
-        {
-          target: { clientHeight, clientWidth },
-        },
-      ]) => {
-        setWidth(clientWidth);
-        setHeight(clientHeight);
-      },
-    );
+
+    const resizeObserver = new ResizeObserver(entries => {
+      const entry = entries[0];
+      if(entry) {
+        const contentRect = entry.contentRect;
+        if(contentRect) {
+          setWidth(contentRect.width);
+          setHeight(contentRect.height);
+        }
+      }
+    })
     elementRef.current && resizeObserver.observe(elementRef.current);
     return () => resizeObserver.disconnect();
   }, []);
@@ -152,4 +153,34 @@ export const useCleanUp = (cleanUp: () => void) => {
   useEffect(() => {
     return cleanUp;
   }, []);
-}
+};
+
+/**
+ * Determines if a component renders for the first time
+ * @returns true if is the first render
+ */
+export const useIsFirstRender = () => {
+  const isFirstRender = useRef<boolean>(true);
+
+  if (isFirstRender.current) {
+    isFirstRender.current = false;
+    return true;
+  }
+
+  return isFirstRender.current;
+};
+
+/**
+ * Executes an effect when its dependencies update
+ * @param effect the effect to be executed
+ * @param deps the dependencies of the effect
+ */
+export const useEffectUpdate = (effect: any, deps: any) => {
+  const isFirst = useIsFirstRender()
+
+  useEffect(() => {
+    if (!isFirst) {
+      return effect()
+    }
+  }, deps);
+};

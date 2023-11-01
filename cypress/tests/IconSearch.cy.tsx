@@ -160,20 +160,24 @@ describe('tests for IconSearch', () => {
     });
 
     it('onSearchValueSettled should be invoked when enter is hit with a new value', () => {
-      cy.mount(<IconSearch 
-        setIconSearch={cy.stub()}
-        onSearchValueSettled={cy.stub().as('onSearchValueSettled')}
-      />);
+      cy.mount(
+        <IconSearch
+          setIconSearch={cy.stub()}
+          onSearchValueSettled={cy.stub().as('onSearchValueSettled')}
+        />,
+      );
       cy.get('[data-testid=ip-searchInput]').type('mockedValue');
       cy.get('[data-testid=ip-searchInput]').type('{enter}');
       cy.get('@onSearchValueSettled').should('have.been.calledOnceWith', 'mockedValue');
     });
 
     it('onSearchValueSettled should be invoked when search is clicked with a new value', () => {
-      cy.mount(<IconSearch 
-        setIconSearch={cy.stub()}
-        onSearchValueSettled={cy.stub().as('onSearchValueSettled')}
-      />);
+      cy.mount(
+        <IconSearch
+          setIconSearch={cy.stub()}
+          onSearchValueSettled={cy.stub().as('onSearchValueSettled')}
+        />,
+      );
       cy.get('[data-testid=ip-searchInput]').type('mockedValue');
       cy.get('[data-testid=ip-searchIcon]').click();
       cy.get('@onSearchValueSettled').should('have.been.calledOnceWith', 'mockedValue');

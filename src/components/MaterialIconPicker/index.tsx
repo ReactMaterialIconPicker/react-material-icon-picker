@@ -24,7 +24,7 @@ export const MaterialIconPicker = memo((props: MaterialIconPickerProps) => {
     onIconClick,
     onIconMouseEnter,
     setIconTipText,
-    disableLoader = false
+    disableLoader = false,
   } = props || {};
 
   const { container, optionContainer } = styles || {};
@@ -70,7 +70,7 @@ export const MaterialIconPicker = memo((props: MaterialIconPickerProps) => {
         />
       </div>
       <Icons
-        iconSearch={iconSearch}
+        iconSearch={searchValue || iconSearch}
         type={type?.value || selectedType.value}
         hsva={hsva || selectedHsva}
         onIconClick={onIconClick}

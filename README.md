@@ -6,6 +6,14 @@
 
 If you like the project, please give the project a GitHub 🌟
 
+## Demo
+
+![image info](./docs/pics/demo.gif)
+
+[npm-img]: https://img.shields.io/npm/v/react-material-icon-picker
+[npm-url]: https://www.npmjs.com/package/react-material-icon-picker
+
+[![Edit ReactMaterialIconPicker](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/vigilant-glade-vj69k5?file=/src/App.jsx)
 
 ## Install
 
@@ -19,9 +27,21 @@ npm install react-material-icon-picker
 import { MaterialIconPicker } from 'react-material-icon-picker';
 
 const MyComponent = () => {
-    return <MaterialIconPicker />
-}
+  return (
+    <div>
+      <MaterialIconPicker />
+    </div>
+  );
+};
 ```
+
+Please make sure that
+
+- there is a container for `<MaterialIconPicker />`
+- and the container has a fixed `width` (either absolute or relative)
+- width values like `auto` will be supported soon
+
+You may need to include `'use client'` in your application. Using the component without `'use client'` will soon be supported.
 
 ## Props
 
@@ -39,6 +59,7 @@ A function that will be called when value of the search input box changes
 
 **onSearchValueSettled?: (value: string) => void**<br>
 A function that will be called when a new search value is settled
+
 - when 'return' key is hit when focusing on the search input box or
 - the Magnifying Glass icon is clicked
 
@@ -47,6 +68,7 @@ The placeholder value of the search input box
 
 **type?: Type**<br>
 type of material icons
+
 ```
 type Type = {
   label: string;
@@ -59,6 +81,7 @@ A function that will be called when a new type is selected
 
 **hsva?: Hsva**<br>
 A fixed value for the color of material icons
+
 ```
 type Hsva = {
   h: number;
@@ -89,6 +112,7 @@ If true, disable the loader icon when user scrolls to the bottom (`false` as def
 
 **styles?: IStyles**<br>
 Custom style of elements of the component
+
 ```
 /*
 StyleUpdater takes the original style of the element and returns the custom style of the element
@@ -125,18 +149,6 @@ type StyleObject = Record<string, string | number>;
 type StyleUpdater = (baseStyle: StyleObject) => StyleObject;
 ```
 
-
-## Demo
-![image info](./docs/pics/demo.gif)
-
-
-
-[npm-img]:https://img.shields.io/npm/v/react-material-icon-picker
-[npm-url]:https://www.npmjs.com/package/react-material-icon-picker
-
-[![Edit ReactMaterialIconPicker](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/vigilant-glade-vj69k5?file=/src/App.jsx)
-
-
 ## Contributing
 
 Your contribution is greatly appreciated! Feel free to fork the repo, make some changes, submit a pull-request! You may also submit a issue to report any bug:)
@@ -145,16 +157,15 @@ Your contribution is greatly appreciated! Feel free to fork the repo, make some 
 
 MIT
 
-
-[build-img]:https://github.com/ryansonshine/typescript-npm-package-template/actions/workflows/release.yml/badge.svg
-[build-url]:https://github.com/ryansonshine/typescript-npm-package-template/actions/workflows/release.yml
-[downloads-img]:https://img.shields.io/npm/dt/typescript-npm-package-template
-[downloads-url]:https://www.npmtrends.com/typescript-npm-package-template
-[issues-img]:https://img.shields.io/github/issues/ryansonshine/typescript-npm-package-template
-[issues-url]:https://github.com/ryansonshine/typescript-npm-package-template/issues
-[codecov-img]:https://codecov.io/gh/ryansonshine/typescript-npm-package-template/branch/main/graph/badge.svg
-[codecov-url]:https://codecov.io/gh/ryansonshine/typescript-npm-package-template
-[semantic-release-img]:https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
-[semantic-release-url]:https://github.com/semantic-release/semantic-release
-[commitizen-img]:https://img.shields.io/badge/commitizen-friendly-brightgreen.svg
-[commitizen-url]:http://commitizen.github.io/cz-cli/
+[build-img]: https://github.com/ryansonshine/typescript-npm-package-template/actions/workflows/release.yml/badge.svg
+[build-url]: https://github.com/ryansonshine/typescript-npm-package-template/actions/workflows/release.yml
+[downloads-img]: https://img.shields.io/npm/dt/typescript-npm-package-template
+[downloads-url]: https://www.npmtrends.com/typescript-npm-package-template
+[issues-img]: https://img.shields.io/github/issues/ryansonshine/typescript-npm-package-template
+[issues-url]: https://github.com/ryansonshine/typescript-npm-package-template/issues
+[codecov-img]: https://codecov.io/gh/ryansonshine/typescript-npm-package-template/branch/main/graph/badge.svg
+[codecov-url]: https://codecov.io/gh/ryansonshine/typescript-npm-package-template
+[semantic-release-img]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
+[semantic-release-url]: https://github.com/semantic-release/semantic-release
+[commitizen-img]: https://img.shields.io/badge/commitizen-friendly-brightgreen.svg
+[commitizen-url]: http://commitizen.github.io/cz-cli/

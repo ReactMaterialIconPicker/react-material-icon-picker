@@ -151,7 +151,7 @@ export const ICONS_CONTAINER_BASE_STYLE: StyleObject = {
   display: 'flex',
   flexWrap: 'wrap',
   justifyContent: 'space-between',
-  overflowY: 'auto',
+  overflowY: 'scroll',
   overflowX: 'hidden',
 };
 

@@ -21,10 +21,14 @@ describe('tests for MaterialIconPicker', () => {
 
     it('changing icon color should alter the color style of icons rendered', () => {
       cy.mount(<MaterialIconPicker />);
-      cy.get('[data-testid=ip-icon]').then(elements => expect(elements[0].style.color).equal('rgb(0, 0, 0)'));
+      cy.get('[data-testid=ip-icon]').then((elements) =>
+        expect(elements[0].style.color).equal('rgb(0, 0, 0)'),
+      );
       cy.get('[data-testid=ip-colorSelectorContainer]').click();
       cy.get('[data-testid=ip-paletteSaturation]').click(10, 10);
-      cy.get('[data-testid=ip-icon]').then(elements => expect(elements[0].style.color).equal('rgb(242, 230, 230)'));
+      cy.get('[data-testid=ip-icon]').then((elements) =>
+        expect(elements[0].style.color).equal('rgb(242, 230, 230)'),
+      );
     });
   });
 });

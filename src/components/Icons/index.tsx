@@ -24,6 +24,7 @@ import {
 import { Icon } from '../Icon';
 import { IconPlaceholder } from '../IconPlaceholder';
 import cssStyles from './index.module.css';
+import { DEFAULT_ICONS_CONTAINER_HEIGHT } from '../../lib/constants';
 
 export const Icons = (props: IconsProps) => {
   const {
@@ -43,10 +44,12 @@ export const Icons = (props: IconsProps) => {
 
   const [iconNumber, setIconNumber] = useState<number>(0);
   const [iconPlaceholderState, setIconPlaceholderState] = useState(0);
+  const [useDefaultIconsContainerHeight, setUseDefaultIconsContainerHeight] = useState(false);
   const [loading, setLoading] = useState(false);
   const [iconsContainerRef, iconsContainerWidth, iconsContainerHeight] =
     useElementSize<HTMLDivElement>();
   const iconContainerDimensionPxRef = useRef<Record<string, number>>({ width: 0, height: 0 });
+  const iconsContainerDimensionPxRef = useRef<Record<string, number>>({ width: 0, height: 0 });
   const iconNumbersRef = useRef<Record<string, number>>({
     maxColumnCount: 0,
     maxRowCount: 0,
@@ -62,12 +65,13 @@ export const Icons = (props: IconsProps) => {
       : MATERIAL_ICONS;
 
   const renderIcons = () => {
-    if (iconPlaceholderState === 0) return <IconPlaceholder styles={styles} />;
-    else if (iconPlaceholderState === 1) {
+    if (iconPlaceholderState === 0) return <></>;
+    else if (iconPlaceholderState === 1) return <IconPlaceholder styles={styles} />;
+    else if (iconPlaceholderState === 2) {
       return new Array(
         iconNumbersRef.current.maxColumnCount * iconNumbersRef.current.maxRowCount,
       ).fill(<IconPlaceholder styles={styles} />);
-    } else if (iconPlaceholderState === 2) {
+    } else if (iconPlaceholderState === 3) {
       return [
         ...iconSearchResults
           .slice(0, iconNumber)
@@ -128,6 +132,24 @@ export const Icons = (props: IconsProps) => {
 
   useEffect(() => {
     if (iconPlaceholderState === 0) {
+
+      iconsContainerDimensionPxRef.current.width = getContentWidth(
+        iconsContainerRef.current as HTMLDivElement,
+      );
+      iconsContainerDimensionPxRef.current.height = getContentHeight(
+        iconsContainerRef.current as HTMLDivElement,
+      );
+
+      if (iconsContainerDimensionPxRef.current.height <= DEFAULT_ICONS_CONTAINER_HEIGHT) {
+        setUseDefaultIconsContainerHeight(true);
+        iconsContainerDimensionPxRef.current.height = 100;
+      } else {
+        setUseDefaultIconsContainerHeight(false);
+      }
+
+      setIconPlaceholderState(1);
+    }
+    if (iconPlaceholderState === 1) {
       const iconPlaceholderContainer = iconsContainerRef.current?.querySelector(
         '[data-testid=ip-iconPlaceholderContainer]',
       );
@@ -137,22 +159,15 @@ export const Icons = (props: IconsProps) => {
         height: rect?.height || 0,
       };
 
-      const iconsContainerContentWidth = getContentWidth(
-        iconsContainerRef.current as HTMLDivElement,
-      );
-      const iconsContainerContentHeight = getContentHeight(
-        iconsContainerRef.current as HTMLDivElement,
-      );
-
       iconNumbersRef.current.maxColumnCount = Math.floor(
-        iconsContainerContentWidth / iconContainerDimensionPxRef.current.width,
+        iconsContainerDimensionPxRef.current.width / iconContainerDimensionPxRef.current.width,
       );
       iconNumbersRef.current.maxRowCount = Math.floor(
-        iconsContainerContentHeight / iconContainerDimensionPxRef.current.height,
+        iconsContainerDimensionPxRef.current.height / iconContainerDimensionPxRef.current.height,
       );
 
-      setIconPlaceholderState(1);
-    } else if (iconPlaceholderState === 1) {
+      setIconPlaceholderState(2);
+    } else if (iconPlaceholderState === 2) {
       iconNumbersRef.current.actualColumnCount = countNumberOfElementsInRow(
         (iconsContainerRef.current as HTMLDivElement).querySelectorAll(
           '[data-testid=ip-iconPlaceholderContainer]',
@@ -173,7 +188,7 @@ export const Icons = (props: IconsProps) => {
         initIconNumber = iconSearchResults.length;
       setIconNumber(initIconNumber);
 
-      setIconPlaceholderState(2);
+      setIconPlaceholderState(3);
     }
   }, [iconPlaceholderState]);
 
@@ -211,11 +226,15 @@ export const Icons = (props: IconsProps) => {
 
   return (
     <div
-      style={
-        isFunction(iconsContainer)
+      style={{
+        ...isFunction(iconsContainer)
           ? iconsContainer(ICONS_CONTAINER_BASE_STYLE)
-          : ICONS_CONTAINER_BASE_STYLE
-      }
+          : ICONS_CONTAINER_BASE_STYLE,
+        ...(useDefaultIconsContainerHeight && { 
+          height: `${DEFAULT_ICONS_CONTAINER_HEIGHT}px`,
+          minHeight: `${DEFAULT_ICONS_CONTAINER_HEIGHT}px`,
+        }),
+      }}
       ref={iconsContainerRef}
       onScroll={onIconsContainerScroll}
       data-testid="ip-iconsContainer"

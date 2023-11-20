@@ -1,5 +1,6 @@
 import { MaterialIconPicker } from '../../src/components/MaterialIconPicker';
-import { ICON_TYPES } from '../../src/lib/constants';
+import { DEFAULT_ICONS_CONTAINER_HEIGHT, ICON_TYPES } from '../../src/lib/constants';
+import { verifyComputedStyle } from '../lib/util';
 
 describe('tests for MaterialIconPicker', () => {
   describe('tests for interaction of different components', () => {
@@ -31,4 +32,27 @@ describe('tests for MaterialIconPicker', () => {
       );
     });
   });
+
+  describe('tests for iconsContainer height', () => {
+    it("when MaterialIconPicker's container has height: 100%, iconsContainer should have height DEFAULT_ICONS_CONTAINER_HEIGHT", () => {
+      cy.mount(<div style={{ height: '100%' }}><MaterialIconPicker /></div>);
+      cy.get('[data-testid=ip-iconsContainer]').then(elements => {
+        expect(window.getComputedStyle(elements[0]).height).to.equal(`${DEFAULT_ICONS_CONTAINER_HEIGHT}px`);
+      }); 
+    });
+
+    it("when MaterialIconPicker's container has height: 100px (small height), iconsContainer should have height DEFAULT_ICONS_CONTAINER_HEIGHT", () => {
+      cy.mount(<div style={{ height: '100px' }}><MaterialIconPicker /></div>);
+      cy.get('[data-testid=ip-iconsContainer]').then(elements => {
+        expect(window.getComputedStyle(elements[0]).height).to.equal(`${DEFAULT_ICONS_CONTAINER_HEIGHT}px`);
+      });    
+    });
+
+    it("when MaterialIconPicker's container has height: 300px (large height), iconsContainer should have flexible height", () => {
+      cy.mount(<div style={{ height: '300px' }}><MaterialIconPicker /></div>);
+      cy.get('[data-testid=ip-iconsContainer]').then(elements => {
+        expect(window.getComputedStyle(elements[0]).height).to.equal('220px');
+      });
+    });
+  })
 });

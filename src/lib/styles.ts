@@ -1,12 +1,16 @@
+import { DEFAULT_ICONS_CONTAINER_HEIGHT } from './constants';
 import { StyleObject } from './types';
 
 export const CONTAINER_BASE_STYLE: StyleObject = {
   width: '100%',
   minWidth: '230px',
   height: '100%',
+  // DEFAULT_ICONS_CONTAINER_HEIGHT + heights of other rows
+  minHeight: `${DEFAULT_ICONS_CONTAINER_HEIGHT + 40 + 40}px`,
   boxShadow: 'rgba(0, 0, 0, 0.25) 1px 1px 7px 2px',
   display: 'flex',
   flexDirection: 'column',
+  boxSizing: 'border-bodx',
 };
 
 export const SEARCH_CONTAINER_BASE_STYLE: StyleObject = {
@@ -143,8 +147,6 @@ export const HUE_BASE_STYLE: StyleObject = {
 
 export const ICONS_CONTAINER_BASE_STYLE: StyleObject = {
   width: '100%',
-  height: '0px',
-  minHeight: '200px',
   flexGrow: '1',
   boxSizing: 'border-box',
   padding: '20px',

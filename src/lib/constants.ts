@@ -7,3 +7,5 @@ export const ICON_TYPES: Type[] = [
   { label: 'Sharp', value: 'sharp' },
   { label: 'Two Tone', value: 'two-tone' },
 ];
+
+export const DEFAULT_ICONS_CONTAINER_HEIGHT = 100;

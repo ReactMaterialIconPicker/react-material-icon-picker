@@ -1,6 +1,6 @@
 {
   "name": "react-material-icon-picker",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "react material icon picker component",
   "main": "dist/bundle.js",
   "types": "dist/index.d.ts",
@@ -22,7 +22,11 @@
   },
   "keywords": [
     "react",
-    "react-component"
+    "react-component",
+    "mui",
+    "material-ui",
+    "material design",
+    "icons"
   ],
   "author": "KurtXiaoZ",
   "license": "MIT",

@@ -34,7 +34,7 @@ export const Icons = (props: IconsProps) => {
     onIconClick,
     onIconMouseEnter,
     setIconTipText,
-    iconSearch,
+    settledIconSearch,
     onIconsChange,
     onIconsScroll,
     disableLoader,
@@ -60,9 +60,17 @@ export const Icons = (props: IconsProps) => {
   const updateIcons = useThrottle(() => setIconPlaceholderState(0), 300);
   const deboucnedRerenderIcons = useDebounce(() => updateIcons(), 300);
   const iconSearchResults =
-    String(iconSearch) !== ''
-      ? MATERIAL_ICONS.filter((s) => s.toLowerCase().includes(iconSearch.toLowerCase()))
+    String(settledIconSearch) !== ''
+      ? MATERIAL_ICONS.filter((s) => s.toLowerCase().includes(settledIconSearch.toLowerCase()))
       : MATERIAL_ICONS;
+
+  const iconsContainerStyle = isFunction(iconsContainer)
+    ? iconsContainer(ICONS_CONTAINER_BASE_STYLE)
+    : ICONS_CONTAINER_BASE_STYLE;
+  const loaderContainerStyle = isFunction(loaderContainer)
+    ? loaderContainer(LOADER_CONTAINER_BASE_STYLE)
+    : LOADER_CONTAINER_BASE_STYLE;
+  const loaderStyle = isFunction(loader) ? loader(LOADER_BASE_STYLE) : LOADER_BASE_STYLE;
 
   const renderIcons = () => {
     if (iconPlaceholderState === 0) return <></>;
@@ -128,11 +136,10 @@ export const Icons = (props: IconsProps) => {
 
   useEffectUpdate(() => {
     setIconPlaceholderState(0);
-  }, [iconSearch]);
+  }, [settledIconSearch]);
 
   useEffect(() => {
     if (iconPlaceholderState === 0) {
-
       iconsContainerDimensionPxRef.current.width = getContentWidth(
         iconsContainerRef.current as HTMLDivElement,
       );
@@ -227,14 +234,13 @@ export const Icons = (props: IconsProps) => {
   return (
     <div
       style={{
-        ...isFunction(iconsContainer)
-          ? iconsContainer(ICONS_CONTAINER_BASE_STYLE)
-          : ICONS_CONTAINER_BASE_STYLE,
-        ...(useDefaultIconsContainerHeight && { 
+        ...iconsContainerStyle,
+        ...(useDefaultIconsContainerHeight && {
           height: `${DEFAULT_ICONS_CONTAINER_HEIGHT}px`,
           minHeight: `${DEFAULT_ICONS_CONTAINER_HEIGHT}px`,
         }),
       }}
+      key={JSON.stringify(iconsContainerStyle)}
       ref={iconsContainerRef}
       onScroll={onIconsContainerScroll}
       data-testid="ip-iconsContainer"
@@ -242,16 +248,14 @@ export const Icons = (props: IconsProps) => {
       {renderIcons()}
       {loading && (
         <div
-          style={
-            isFunction(loaderContainer)
-              ? loaderContainer(LOADER_CONTAINER_BASE_STYLE)
-              : LOADER_CONTAINER_BASE_STYLE
-          }
+          style={loaderContainerStyle}
+          key={JSON.stringify(loaderContainerStyle)}
           data-testid="ip-loaderContainer"
         >
           <img
             src={LoaderIcon}
-            style={isFunction(loader) ? loader(LOADER_BASE_STYLE) : LOADER_BASE_STYLE}
+            style={loaderStyle}
+            key={JSON.stringify(loaderStyle)}
             data-testid="ip-loader"
             className={cssStyles['ip-rotate']}
           />

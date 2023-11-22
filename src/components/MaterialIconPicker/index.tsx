@@ -8,8 +8,9 @@ import { ICON_TYPES } from '../../lib/constants';
 import { TypeSelector } from '../TypeSelector';
 import { ColorSelector } from '../ColorSelector';
 import { Icons } from '../Icons';
+import { isFunction } from '../../lib/utils';
 
-export const MaterialIconPicker = memo((props: MaterialIconPickerProps) => {
+export const MaterialIconPicker = (props: MaterialIconPickerProps) => {
   const {
     styles,
     defaultSearchValue,
@@ -30,16 +31,22 @@ export const MaterialIconPicker = memo((props: MaterialIconPickerProps) => {
   const { container, optionContainer } = styles || {};
 
   const [iconSearch, setIconSearch] = useState<string>('');
+  const [settledIconSearch, setSettledIconSearch] = useState<string>('');
   const [selectedType, setSelectedType] = useState<Type>(ICON_TYPES[0]);
   const [selectedHsva, setSelectedHsva] = useState<Hsva>({ h: 0, s: 0, v: 0, a: 1 });
+
+  const containerStyle = isFunction(container)
+    ? container(CONTAINER_BASE_STYLE)
+    : CONTAINER_BASE_STYLE;
 
   useMaterialIcons();
 
   return (
-    <div style={container ? container(CONTAINER_BASE_STYLE) : CONTAINER_BASE_STYLE}>
+    <div style={containerStyle} key={JSON.stringify(containerStyle)}>
       <IconSearch
         styles={styles}
         setIconSearch={setIconSearch}
+        setSettledIconSearch={setSettledIconSearch}
         defaultSearchValue={defaultSearchValue}
         searchValue={searchValue}
         onSearchValueChange={onSearchValueChange}
@@ -70,7 +77,7 @@ export const MaterialIconPicker = memo((props: MaterialIconPickerProps) => {
         />
       </div>
       <Icons
-        iconSearch={searchValue || iconSearch}
+        settledIconSearch={settledIconSearch}
         type={type?.value || selectedType.value}
         hsva={hsva || selectedHsva}
         onIconClick={onIconClick}
@@ -81,4 +88,4 @@ export const MaterialIconPicker = memo((props: MaterialIconPickerProps) => {
       />
     </div>
   );
-});
+};

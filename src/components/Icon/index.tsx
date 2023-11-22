@@ -10,7 +10,7 @@ export const Icon = forwardRef(
   (props: IconProps, iconsContainerRef: ForwardedRef<HTMLDivElement | null>) => {
     const { styles, icon, type, hsva, onIconClick, onIconMouseEnter, setIconTipText } = props || {};
 
-    const { iconContainer, icon: iconStyle, iconTip } = styles || {};
+    const { iconContainer, icon: iconStyleUpdater, iconTip } = styles || {};
 
     const [showTip, setShowTip] = useState<boolean>(false);
     const iconContainerRef = useRef<HTMLDivElement | null>(null);
@@ -24,10 +24,18 @@ export const Icon = forwardRef(
       }),
       visibility: showTip ? 'visible' : 'hidden',
     });
+    const iconContainerStyle = isFunction(iconContainer)
+      ? iconContainer(ICON_CONTAINER_BASE_STYLE)
+      : ICON_CONTAINER_BASE_STYLE;
+    const iconStyle = isFunction(iconStyleUpdater)
+      ? iconStyleUpdater(ICON_BASE_STYLE({ hex: hsvaToHex(hsva) }))
+      : ICON_BASE_STYLE({ hex: hsvaToHex(hsva) });
+    const iconTipStyle = isFunction(iconTip) ? iconTip(iconTipBaseStyle) : iconTipBaseStyle;
 
     return (
       <div
-        style={iconContainer ? iconContainer(ICON_CONTAINER_BASE_STYLE) : ICON_CONTAINER_BASE_STYLE}
+        style={iconContainerStyle}
+        key={JSON.stringify(iconContainerStyle) + icon}
         ref={iconContainerRef}
         className={cssStyles.iconContainer}
         onMouseEnter={() => {
@@ -40,17 +48,15 @@ export const Icon = forwardRef(
       >
         <div
           className={`material-icons${type === ICON_TYPES[0].value ? '' : '-' + type}`}
-          style={
-            iconStyle
-              ? iconStyle(ICON_BASE_STYLE({ hex: hsvaToHex(hsva) }))
-              : ICON_BASE_STYLE({ hex: hsvaToHex(hsva) })
-          }
+          style={iconStyle}
+          key={JSON.stringify(iconStyle)}
           data-testid="ip-icon"
         >
           {icon}
         </div>
         <div
-          style={iconTip ? iconTip(iconTipBaseStyle) : iconTipBaseStyle}
+          style={iconTipStyle}
+          key={JSON.stringify(iconTipStyle)}
           ref={iconTipRef}
           data-testid="ip-iconTip"
         >

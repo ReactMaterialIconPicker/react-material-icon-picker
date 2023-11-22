@@ -14,7 +14,11 @@ describe('tests for Icons', () => {
   describe('all elements should be rendered correctly', () => {
     it('the container should be visible and loader should not', () => {
       cy.mount(
-        <Icons type={ICON_TYPES[0].value} hsva={{ h: 0, s: 0, v: 0, a: 0 }} iconSearch={''} />,
+        <Icons
+          type={ICON_TYPES[0].value}
+          hsva={{ h: 0, s: 0, v: 0, a: 0 }}
+          settledIconSearch={''}
+        />,
       );
       cy.get('[data-testid=ip-iconsContainer]').should('be.visible');
       cy.get('[data-testid=ip-loaderContainer]').should('not.exist');
@@ -23,7 +27,11 @@ describe('tests for Icons', () => {
 
     it('loader should be visible for a period of time when scrolled to the bottom', () => {
       cy.mount(
-        <Icons type={ICON_TYPES[0].value} hsva={{ h: 0, s: 0, v: 0, a: 0 }} iconSearch={''} />,
+        <Icons
+          type={ICON_TYPES[0].value}
+          hsva={{ h: 0, s: 0, v: 0, a: 0 }}
+          settledIconSearch={''}
+        />,
       );
       cy.get('[data-testid=ip-iconsContainer]').scrollTo('bottom');
       cy.get('[data-testid=ip-loaderContainer]').should('be.visible');
@@ -39,7 +47,11 @@ describe('tests for Icons', () => {
         width += 10;
         cy.viewport(width, 500);
         cy.mount(
-          <Icons type={ICON_TYPES[0].value} hsva={{ h: 0, s: 0, v: 0, a: 0 }} iconSearch={''} />,
+          <Icons
+            type={ICON_TYPES[0].value}
+            hsva={{ h: 0, s: 0, v: 0, a: 0 }}
+            settledIconSearch={''}
+          />,
         );
         cy.get('[data-testid=ip-iconContainer]').then((elements) => {
           const actualColumnCount = countNumberOfElementsInRow(elements as any);
@@ -52,7 +64,11 @@ describe('tests for Icons', () => {
       let originalIconNumber = 0;
       cy.viewport(400, 500);
       cy.mount(
-        <Icons type={ICON_TYPES[0].value} hsva={{ h: 0, s: 0, v: 0, a: 0 }} iconSearch={''} />,
+        <Icons
+          type={ICON_TYPES[0].value}
+          hsva={{ h: 0, s: 0, v: 0, a: 0 }}
+          settledIconSearch={''}
+        />,
       );
       cy.get('[data-testid=ip-iconContainer]').then((elements) => {
         const actualColumnCount = countNumberOfElementsInRow(elements as any);
@@ -69,7 +85,11 @@ describe('tests for Icons', () => {
 
     it('the container should have the correct base style', () => {
       cy.mount(
-        <Icons type={ICON_TYPES[0].value} hsva={{ h: 0, s: 0, v: 0, a: 0 }} iconSearch={''} />,
+        <Icons
+          type={ICON_TYPES[0].value}
+          hsva={{ h: 0, s: 0, v: 0, a: 0 }}
+          settledIconSearch={''}
+        />,
       );
       verifyComputedStyle('[data-testid=ip-iconsContainer]', ICONS_CONTAINER_BASE_STYLE);
       cy.get('[data-testid=ip-iconsContainer]').scrollTo('bottom');
@@ -79,7 +99,11 @@ describe('tests for Icons', () => {
 
     it('icon tip should be in the boundaries of icons container', () => {
       cy.mount(
-        <Icons type={ICON_TYPES[0].value} hsva={{ h: 0, s: 0, v: 0, a: 0 }} iconSearch={''} />,
+        <Icons
+          type={ICON_TYPES[0].value}
+          hsva={{ h: 0, s: 0, v: 0, a: 0 }}
+          settledIconSearch={''}
+        />,
       );
       const containerRect = document
         .querySelector('[data-testid=ip-iconsContainer]')
@@ -106,7 +130,7 @@ describe('tests for Icons', () => {
         <Icons
           type={ICON_TYPES[1].value}
           hsva={{ h: 0, s: 0, v: 0, a: 0 }}
-          iconSearch={''}
+          settledIconSearch={''}
           styles={{ iconsContainer: (baseStyle) => ({ ...baseStyle, border: '1px solid red' }) }}
         />,
       );
@@ -120,7 +144,7 @@ describe('tests for Icons', () => {
         <Icons
           type={ICON_TYPES[1].value}
           hsva={{ h: 0, s: 0, v: 0, a: 0 }}
-          iconSearch={''}
+          settledIconSearch={''}
           styles={{ loaderContainer: (baseStyle) => ({ ...baseStyle, border: '1px solid red' }) }}
         />,
       );
@@ -135,7 +159,7 @@ describe('tests for Icons', () => {
         <Icons
           type={ICON_TYPES[1].value}
           hsva={{ h: 0, s: 0, v: 0, a: 0 }}
-          iconSearch={''}
+          settledIconSearch={''}
           styles={{ loader: (baseStyle) => ({ ...baseStyle, border: '1px solid red' }) }}
         />,
       );
@@ -147,14 +171,22 @@ describe('tests for Icons', () => {
 
     it('test type', () => {
       cy.mount(
-        <Icons type={ICON_TYPES[1].value} hsva={{ h: 0, s: 0, v: 0, a: 0 }} iconSearch={''} />,
+        <Icons
+          type={ICON_TYPES[1].value}
+          hsva={{ h: 0, s: 0, v: 0, a: 0 }}
+          settledIconSearch={''}
+        />,
       );
       cy.get('[data-testid=ip-icon]').should('have.class', `material-icons-${ICON_TYPES[1].value}`);
     });
 
     it('test hsva', () => {
       cy.mount(
-        <Icons type={ICON_TYPES[0].value} hsva={{ h: 1, s: 1, v: 1, a: 1 }} iconSearch={''} />,
+        <Icons
+          type={ICON_TYPES[0].value}
+          hsva={{ h: 1, s: 1, v: 1, a: 1 }}
+          settledIconSearch={''}
+        />,
       );
       verifyComputedStyle(
         '[data-testid=ip-icon]',
@@ -170,7 +202,7 @@ describe('tests for Icons', () => {
         <Icons
           type={ICON_TYPES[1].value}
           hsva={{ h: 0, s: 0, v: 0, a: 0 }}
-          iconSearch={''}
+          settledIconSearch={''}
           disableLoader
         />,
       );
@@ -184,7 +216,7 @@ describe('tests for Icons', () => {
         <Icons
           type={ICON_TYPES[1].value}
           hsva={{ h: 0, s: 0, v: 0, a: 0 }}
-          iconSearch={''}
+          settledIconSearch={''}
           onIconsScroll={cy.stub().as('mockedOnIconsScroll')}
         />,
       );
@@ -192,12 +224,12 @@ describe('tests for Icons', () => {
       cy.get('@mockedOnIconsScroll').should('have.been.called');
     });
 
-    it('test iconSearch -- iconSearch should change icon number', () => {
+    it('test settledIconSearch -- settledIconSearch should change icon number', () => {
       cy.mount(
         <Icons
           type={ICON_TYPES[1].value}
           hsva={{ h: 0, s: 0, v: 0, a: 0 }}
-          iconSearch={'impossibleIconSearchValue'}
+          settledIconSearch={'impossibleIconSearchValue'}
         />,
       );
       cy.get('[data-testid=ip-iconContainer]').should('not.exist');

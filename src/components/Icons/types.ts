@@ -12,7 +12,7 @@ interface IStyles {
 
 export interface IconsProps {
   styles?: IStyles;
-  iconSearch: string;
+  settledIconSearch: string;
   type: string;
   hsva: { h: number; s: number; v: number; a: number };
   onIconsChange?: (icons: string[]) => void;

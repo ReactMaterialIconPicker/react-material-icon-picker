@@ -9,7 +9,7 @@ import { verifyComputedStyle } from '../lib/util';
 describe('tests for IconSearch', () => {
   describe('all elements should be correctly rendered', () => {
     it('all elements should be visible', () => {
-      cy.mount(<IconSearch setIconSearch={cy.stub()} />);
+      cy.mount(<IconSearch setSettledIconSearch={cy.stub()} setIconSearch={cy.stub()} />);
       cy.get('[data-testid=ip-searchContainer]').should('be.visible');
       cy.get('[data-testid=ip-searchIcon]').should('be.visible');
       cy.get('[data-testid=ip-searchInput]').should('be.visible');
@@ -18,7 +18,7 @@ describe('tests for IconSearch', () => {
 
   describe('elements should have correct styles', () => {
     it('all elements should have the expected default styles', () => {
-      cy.mount(<IconSearch setIconSearch={cy.stub()} />);
+      cy.mount(<IconSearch setSettledIconSearch={cy.stub()} setIconSearch={cy.stub()} />);
       verifyComputedStyle('[data-testid=ip-searchContainer]', SEARCH_CONTAINER_BASE_STYLE);
       verifyComputedStyle('[data-testid=ip-searchIcon]', SEARCH_ICON_BASE_STYLE);
       verifyComputedStyle('[data-testid=ip-searchInput]', SEARCH_INPUT_BASE_STYLE, {
@@ -29,29 +29,75 @@ describe('tests for IconSearch', () => {
 
   describe('IconSearch should correctly invoke setIconSearch', () => {
     it('clicking ip-searchIcon should invoke setIconSearch with the value of ip-searchInput', () => {
-      cy.mount(<IconSearch setIconSearch={cy.stub().as('mockedSetIconSearch')} />);
+      cy.mount(
+        <IconSearch
+          setSettledIconSearch={cy.stub()}
+          setIconSearch={cy.stub().as('mockedSetIconSearch')}
+        />,
+      );
       cy.get('[data-testid=ip-searchInput]').type('mockedInputValue');
       cy.get('[data-testid=ip-searchIcon]').click();
       cy.get('@mockedSetIconSearch').should('have.been.calledOnceWith', 'mockedInputValue');
     });
 
     it('clicking ip-searchIcon should invoke setIconSearch with the value of ip-searchInput even if it is empty', () => {
-      cy.mount(<IconSearch setIconSearch={cy.stub().as('mockedSetIconSearch')} />);
+      cy.mount(
+        <IconSearch
+          setSettledIconSearch={cy.stub()}
+          setIconSearch={cy.stub().as('mockedSetIconSearch')}
+        />,
+      );
       cy.get('[data-testid=ip-searchIcon]').click();
       cy.get('@mockedSetIconSearch').should('have.been.calledOnceWith', '');
     });
 
     it('hitting enter should invoke setIconSearch with the value of ip-searchInput', () => {
-      cy.mount(<IconSearch setIconSearch={cy.stub().as('mockedSetIconSearch')} />);
+      cy.mount(
+        <IconSearch
+          setSettledIconSearch={cy.stub()}
+          setIconSearch={cy.stub().as('mockedSetIconSearch')}
+        />,
+      );
       cy.get('[data-testid=ip-searchInput]').type('mockedInputValue');
       cy.get('[data-testid=ip-searchIcon]').click();
       cy.get('@mockedSetIconSearch').should('have.been.calledOnceWith', 'mockedInputValue');
     });
 
     it('hitting enter should invoke setIconSearch with the value of ip-searchInput even if it is empty', () => {
-      cy.mount(<IconSearch setIconSearch={cy.stub().as('mockedSetIconSearch')} />);
+      cy.mount(
+        <IconSearch
+          setSettledIconSearch={cy.stub()}
+          setIconSearch={cy.stub().as('mockedSetIconSearch')}
+        />,
+      );
       cy.get('[data-testid=ip-searchIcon]').click();
       cy.get('@mockedSetIconSearch').should('have.been.calledOnceWith', '');
+    });
+  });
+
+  describe('IconSearch should correctly invoke setSettledIconSearch', () => {
+    it('setSettledIconSearch should be invoked when enter is hit with a new value', () => {
+      cy.mount(
+        <IconSearch
+          setIconSearch={cy.stub()}
+          setSettledIconSearch={cy.stub().as('setSettledIconSearch')}
+        />,
+      );
+      cy.get('[data-testid=ip-searchInput]').type('mockedValue');
+      cy.get('[data-testid=ip-searchInput]').type('{enter}');
+      cy.get('@setSettledIconSearch').should('have.been.calledOnceWith', 'mockedValue');
+    });
+
+    it('setSettledIconSearch should be invoked when search is clicked with a new value', () => {
+      cy.mount(
+        <IconSearch
+          setIconSearch={cy.stub()}
+          setSettledIconSearch={cy.stub().as('setSettledIconSearch')}
+        />,
+      );
+      cy.get('[data-testid=ip-searchInput]').type('mockedValue');
+      cy.get('[data-testid=ip-searchIcon]').click();
+      cy.get('@setSettledIconSearch').should('have.been.calledOnceWith', 'mockedValue');
     });
   });
 
@@ -60,6 +106,7 @@ describe('tests for IconSearch', () => {
       cy.mount(
         <IconSearch
           setIconSearch={cy.stub()}
+          setSettledIconSearch={cy.stub()}
           styles={{
             searchContainer: (baseStyle) => ({
               ...baseStyle,
@@ -78,6 +125,7 @@ describe('tests for IconSearch', () => {
       cy.mount(
         <IconSearch
           setIconSearch={cy.stub()}
+          setSettledIconSearch={cy.stub()}
           styles={{
             searchIcon: (baseStyle) => ({
               ...baseStyle,
@@ -96,6 +144,7 @@ describe('tests for IconSearch', () => {
       cy.mount(
         <IconSearch
           setIconSearch={cy.stub()}
+          setSettledIconSearch={cy.stub()}
           styles={{
             searchInput: (baseStyle) => ({
               ...baseStyle,
@@ -114,7 +163,13 @@ describe('tests for IconSearch', () => {
     });
 
     it('defaultSearchValue should sets the default value of ip-searchInput', () => {
-      cy.mount(<IconSearch setIconSearch={cy.stub()} defaultSearchValue="mockedDefaultValue" />);
+      cy.mount(
+        <IconSearch
+          setSettledIconSearch={cy.stub()}
+          setIconSearch={cy.stub()}
+          defaultSearchValue="mockedDefaultValue"
+        />,
+      );
       cy.get('[data-testid=ip-searchInput]')
         .should('have.value', 'mockedDefaultValue')
         .clear()
@@ -123,7 +178,13 @@ describe('tests for IconSearch', () => {
     });
 
     it('searchValue should sets the value of ip-searchInput', () => {
-      cy.mount(<IconSearch setIconSearch={cy.stub()} searchValue="mockedValue" />);
+      cy.mount(
+        <IconSearch
+          setSettledIconSearch={cy.stub()}
+          setIconSearch={cy.stub()}
+          searchValue="mockedValue"
+        />,
+      );
       cy.get('[data-testid=ip-searchInput]')
         .should('have.value', 'mockedValue')
         .type('newMockedValue')
@@ -134,6 +195,7 @@ describe('tests for IconSearch', () => {
       cy.mount(
         <IconSearch
           setIconSearch={cy.stub()}
+          setSettledIconSearch={cy.stub()}
           searchValue="mockedValue"
           defaultSearchValue="mockedDefaultValue"
         />,
@@ -145,6 +207,7 @@ describe('tests for IconSearch', () => {
       cy.mount(
         <IconSearch
           setIconSearch={cy.stub()}
+          setSettledIconSearch={cy.stub()}
           onSearchValueChange={cy.stub().as('onSearchValueChange')}
         />,
       );
@@ -163,6 +226,7 @@ describe('tests for IconSearch', () => {
       cy.mount(
         <IconSearch
           setIconSearch={cy.stub()}
+          setSettledIconSearch={cy.stub()}
           onSearchValueSettled={cy.stub().as('onSearchValueSettled')}
         />,
       );
@@ -175,6 +239,7 @@ describe('tests for IconSearch', () => {
       cy.mount(
         <IconSearch
           setIconSearch={cy.stub()}
+          setSettledIconSearch={cy.stub()}
           onSearchValueSettled={cy.stub().as('onSearchValueSettled')}
         />,
       );
@@ -184,7 +249,13 @@ describe('tests for IconSearch', () => {
     });
 
     it('searchBoxPlaceholder should set the placeholder value of ip-searchInput', () => {
-      cy.mount(<IconSearch setIconSearch={cy.stub()} searchBoxPlaceholder="mockedPlaceholder" />);
+      cy.mount(
+        <IconSearch
+          setSettledIconSearch={cy.stub()}
+          setIconSearch={cy.stub()}
+          searchBoxPlaceholder="mockedPlaceholder"
+        />,
+      );
       cy.get('[data-testid=ip-searchInput]')
         .invoke('attr', 'placeholder')
         .should('eq', 'mockedPlaceholder');

@@ -35,17 +35,11 @@ const MyComponent = () => {
 };
 ```
 
-Please make sure that
-
-- there is a container for `<MaterialIconPicker />`
-- and the container has a fixed `width` (either absolute or relative)
-- width values like `auto` will be supported soon
-
-You may need to include `'use client'` in your application. Using the component without `'use client'` will soon be supported.
+[Documentation](https://reactmaterialiconpicker.github.io/demo/)
 
 ## Props
 
-Documentation for props is still being updated. Please feel free to submit an issue on Github to suggest props that could be useful.
+Please visit the **above link** to view the full documentation.
 
 **defaultSearchValue?: string**<br>
 A default value for the search input box

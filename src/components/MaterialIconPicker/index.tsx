@@ -38,6 +38,9 @@ export const MaterialIconPicker = (props: MaterialIconPickerProps) => {
   const containerStyle = isFunction(container)
     ? container(CONTAINER_BASE_STYLE)
     : CONTAINER_BASE_STYLE;
+  const optionContainerStyle = isFunction(optionContainer)
+    ? optionContainer(OPTION_CONTAINER_BASE_STYLE)
+    : OPTION_CONTAINER_BASE_STYLE;
 
   useMaterialIcons();
 
@@ -55,11 +58,8 @@ export const MaterialIconPicker = (props: MaterialIconPickerProps) => {
       />
       <div
         data-testid="mip-optionContainer"
-        style={
-          optionContainer
-            ? optionContainer(OPTION_CONTAINER_BASE_STYLE)
-            : OPTION_CONTAINER_BASE_STYLE
-        }
+        style={optionContainerStyle}
+        key={JSON.stringify(optionContainerStyle)}
       >
         <TypeSelector
           type={type}

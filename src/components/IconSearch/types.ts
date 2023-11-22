@@ -10,6 +10,7 @@ interface IStyles {
 export interface IconSearchProps {
   styles?: IStyles;
   setIconSearch: Dispatch<SetStateAction<string>>;
+  setSettledIconSearch: Dispatch<SetStateAction<string>>;
   defaultSearchValue?: string;
   searchValue?: string;
   onSearchValueChange?: (value: string) => void;

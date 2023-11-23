@@ -1,8 +1,14 @@
 name: unit testing
 
-on:
+on: 
   push:
+    branches:
+      - master
+      - feature/*
   pull_request:
+    branches:
+      - master
+      - feature/*
 
 jobs:
   jest:
